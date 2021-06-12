@@ -305,7 +305,7 @@ if(isset($_GET['name']))
           echo '<button class="accordion" style="font-weight:bold;">'.$value.'</button>';
           echo '<div class="panel">';
           echo '<div id="divCard" class="row icard">';
-          $query3 = "SELECT * FROM `catdetails` WHERE `category`='$value'";
+          $query3 = "SELECT * FROM `fooditems` WHERE `itemType`='$value' && `restaurant`='$name'";
           if($qrun3 = mysqli_query($conn,$query3))
           {
             while($row3 = mysqli_fetch_assoc($qrun3))
@@ -350,7 +350,7 @@ if(isset($_GET['name']))
         foreach($catd as $x => $val)
         {
           echo '<h4 class="col-12 text-center"><span style="border-bottom:1px solid black;">'.$val.'</span></h4>';
-          $query4 = "SELECT * FROM `catdetails` WHERE `category`='$val'";
+          $query4 = "SELECT * FROM `fooditems` WHERE `itemType`='$val' && `restaurant`='$name'";
           if($qrun4 = mysqli_query($conn,$query4))
           {
             while($row4 = mysqli_fetch_assoc($qrun4))
