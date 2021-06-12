@@ -316,9 +316,9 @@ if(isset($_GET['name']))
               echo '<img src="'.$row3['image'].'" alt="" width="150px" height="140px">';
               echo '</section>';
               echo '<div>';
-              echo '<h6 class="card-title" style="">'.$row3['title'].'</h6>';
+              echo '<h6 class="card-title" style="">'.$row3['item'].'</h6>';
               echo '<div style="height:70px;overflow:auto;">';
-              echo '<p class="card-text" style="">'.$row3['descrn'].'</p>';
+              echo '<p class="card-text" style="">'.$row3['description'].'</p>';
               echo '</div>';
               echo '<div style="float:right;margin-bottom:0px;">';
               echo '<button onclick="add();" class="btn btn-secondary">Add+</button>';
@@ -362,9 +362,9 @@ if(isset($_GET['name']))
                   <img src="<?php echo $row4['image']; ?>" alt="" width="150px" height="140px">
                 </section>
                 <div>
-                  <h6 class="card-title" style=""><?php echo $row4['title']; ?></h6>
+                  <h6 class="card-title" style=""><?php echo $row4['item']; ?></h6>
                   <div style="height:70px;overflow:auto;">
-                    <p class="card-text" style=""><?php echo $row4['descrn']; ?></p>
+                    <p class="card-text" style=""><?php echo $row4['desciption']; ?></p>
                   </div>
                   <div style="float:right;margin-bottom:0px;">
                     <button onclick="add();" class="btn btn-secondary">Add+</button>
