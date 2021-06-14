@@ -379,6 +379,9 @@ if(isset($_GET['name']))
         echo '</div>';
         echo '</div>';
     ?>
+  </div>
+ <?php require_once('about.php');?>
+  </div>
       <div id="snackbar">Signin to continue...</div>
       <?php require_once('footer.php'); ?>
 </body>
