@@ -215,7 +215,7 @@ if(isset($_GET['category']))
   <div class="container-lg mt-2">
    <div id="divCard" class="row icard">
      <?php
-       $query = "SELECT * FROM `catdetails` WHERE `category`='$cat'";
+       $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat'";
        if($qrun = mysqli_query($conn,$query))
        {
          while($row = mysqli_fetch_assoc($qrun))
@@ -227,9 +227,9 @@ if(isset($_GET['category']))
            <img src="<?php echo $row['image']; ?>" alt="" width="150px" height="140px">
          </section>
          <div>
-           <h6 class="card-title" style=""><?php echo $row['title']; ?></h6>
+           <h6 class="card-title" style=""><?php echo $row['item']; ?></h6>
            <div style="height:70px;overflow:auto;">
-           <p class="card-text" style=""><?php echo $row['descrn']; ?></p>
+           <p class="card-text" style=""><?php echo $row['description']; ?></p>
            </div>
            <div style="float:right;margin-bottom:0px;">
            <button onclick="add();" class="btn btn-secondary">Add+</button>
