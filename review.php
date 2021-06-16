@@ -8,9 +8,12 @@
     <?php require_once("links.php")?>
     <style>
 .rbox{
-        border:1px solid black;
+        border:1px solid #d1d1d1;
         padding:10px;
-        margin:auto ;
+        width:50%;
+        margin:30px auto ;
+        background-color:white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .input {
   display: flex;
@@ -18,6 +21,22 @@
   align-items: center;
   width: 100%;
 }
+textarea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1.5px solid #d1d1d1;
+  width: 150%;
+  margin-bottom:20px;
+  outline:none;
+  border:none;  
+}
+
+
 .stars {
   display: flex;
   padding: 0 20px;
@@ -25,7 +44,7 @@
 
 .star1, .star2, .star3, .star4, .star5 {
   margin-right: 5px;
-  font-size: 1.3rem;
+  font-size: 1.9rem;
   cursor: pointer;
 }
 
@@ -41,7 +60,10 @@
   font-size: 1rem;
   transition: all .2s ease-in-out;
 }
-
+.submitbtn{
+    display:flex;
+    justify-content:center;
+}
 .submit:hover {
   background-color: #4592ff;
 }
@@ -93,6 +115,9 @@
   .rdeta{
       padding:15px;
   }
+  .checked{
+      color:orange;
+  }
     </style>
 </head>
 <body>
@@ -133,17 +158,19 @@
       <div class="inputbox">
         <textarea type="text" class="reviewinp" placeholder="Write a review"></textarea>
       </div>
+    
       <div class="stars">
-        <div class="star1"><i class="far fa-star starj1"></i></div>
-        <div class="star2"><i class="far fa-star starj2"></i></div>
-        <div class="star3"><i class="far fa-star starj3"></i></div>
-        <div class="star4"><i class="far fa-star starj4"></i></div>
-        <div class="star5"><i class="far fa-star starj5"></i></div>
+        <div class="star1"><i class="fa fa-star checked"></i></div>
+        <div class="star2"><i class="fa fa-star checked"></i></div>
+        <div class="star3"><i class="fa fa-star checked"></i></div>
+        <div class="star4"><i class="fa fa-star checked"></i></div>
+        <div class="star5"><i class="fa fa-star "></i></div>
+      </div>
       </div>
       <div class="submitbtn">
         <button class="submit">Submit Review</button>
       </div>
-    </div>
+    
   </div>
   </div>
 </div>
