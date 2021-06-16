@@ -33,7 +33,7 @@ textarea {
   width: 150%;
   margin-bottom:20px;
   outline:none;
-  border:none;  
+   
 }
 
 
@@ -81,7 +81,7 @@ textarea {
   padding: 10px 0 10px 10px;
   outline: none;
   border-radius: 5px;
-  border: none;
+  border: 1.5px solid #d1d1d1;
   background-color: #f5f5f5;
   font-family: 'Sulphur Point', sans-serif;
   font-size: 1rem;
