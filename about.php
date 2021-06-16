@@ -14,12 +14,6 @@ require_once('googleLogin/config.php');
 body {
   background-color:  #eee;
 }
-.about .title {
-    margin-bottom: 50px;
-    text-transform: uppercase;
-    font-family:times;
-    margin-bottom:0;
-}
 .about .card-title{
     text-align:center;
     margin:0;
@@ -103,7 +97,6 @@ address{
 </head>
 <body>
 <div class="container about">
-  <div class="title h1 text-center">ABOUT</div>
   <!-- Card Start -->
   <div class="card">
     <div class="row ">

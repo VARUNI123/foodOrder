@@ -132,7 +132,42 @@ if(isset($_GET['name']))
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-
+/* map styles */
+.mapouter{
+  position:relative;
+  text-align:center;
+  width:100vw;
+  height:400px;
+}
+.gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    width:100vw;
+    height:400px;
+}
+.gmap_iframe{
+  width:100vw!important;
+  height:400px!important;
+}
+.dtitle{
+  display:flex;
+  justify-content:center;
+}
+.title{
+  background-color:black;
+  color:white;
+  display:inline-flex;
+  width:auto;
+  height:50px;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  font-weight:1.5rem;
+  font-family:times;
+  padding:15px;
+  margin-top:15px;
+  
+}
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;}
   to {bottom: 30px; opacity: 1;}
@@ -243,7 +278,7 @@ if(isset($_GET['name']))
         </div>
         <div class="cont">
           <div class="container-lg">
-            <div class="row rdet">
+            <div class="row rdet ">
               <div class="col-10 col-sm-6 col-md-6">
                 <h2><?php echo $row['name'];?></h2>
                 <h6 class="text-secondary">Phone.No: <?php echo $row['phone']; ?></h6>
@@ -349,7 +384,7 @@ if(isset($_GET['name']))
         echo '<div id="divCard" class="row icard">';
         foreach($catd as $x => $val)
         {
-          echo '<h4 class="col-12 text-center"><span style="border-bottom:1px solid black;">'.$val.'</span></h4>';
+          echo '<h4 class="col-12 text-center"><span style="border-bottom:1px solid black; font-size:40px;">'.$val.'</span></h4>';
           $query4 = "SELECT * FROM `fooditems` WHERE `itemType`='$val' && `restaurant`='$name'";
           if($qrun4 = mysqli_query($conn,$query4))
           {
@@ -364,7 +399,7 @@ if(isset($_GET['name']))
                 <div>
                   <h6 class="card-title" style=""><?php echo $row4['item']; ?></h6>
                   <div style="height:70px;overflow:auto;">
-                    <p class="card-text" style=""><?php echo $row4['desciption']; ?></p>
+                    <p class="card-text" style=""><?php echo $row4['description']; ?></p>
                   </div>
                   <div style="float:right;margin-bottom:0px;">
                     <button onclick="add();" class="btn btn-secondary">Add+</button>
@@ -380,7 +415,12 @@ if(isset($_GET['name']))
         echo '</div>';
     ?>
   </div>
+  <div class="dtitle"><span class="title">ABOUT</span></div>
  <?php require_once('about.php');?>
+  </div>
+  </div>
+  <div class="dtitle"><span class="title">REVIEWS</span></div>
+ <?php require_once('review.php');?>
   </div>
       <div id="snackbar">Signin to continue...</div>
       <?php require_once('footer.php'); ?>
