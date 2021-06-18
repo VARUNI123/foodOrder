@@ -22,7 +22,7 @@ if(isset($_GET['name']))
         display:flex;
         align-items:center;
         justify-content:center;
-        margin-top:60px;
+        margin-top:0px;
         height:400px;
         width:100%;
         background-position:center;
@@ -112,7 +112,7 @@ if(isset($_GET['name']))
     }
 
 
-    #snackbar {
+    #snackbar,#snackbarR {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
@@ -124,14 +124,16 @@ if(isset($_GET['name']))
   position: fixed;
   z-index: 1;
   left: 50%;
+  transform:translateX(-18%);
   bottom: 30px;
 }
 
-#snackbar.show {
+#snackbar.show,#snackbarR.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
+
 /* map styles */
 .mapouter{
   position:relative;
@@ -258,13 +260,16 @@ if(isset($_GET['name']))
     </style>
   </head>
   <body>
-    <div id="mNav">
-      <?php require('mobileNav.php'); ?>
-    </div>
-    <div id="lNav">
-      <?php require('navbar.php'); ?>
-    </div>
-    <?php
+   <!-- <div id="mNav">
+   <?php  //require('mobileNav.php'); ?>
+  </div> -->
+  <!-- <div id="lNav">
+     //require('navbar.php'); ?>
+  </div> -->
+  <div>
+    <?php require_once('navbarM.php'); ?>
+  </div>
+  <?php
      $query = "SELECT * FROM `restaurants` WHERE `name` = '$name' ";
      if($qrun = mysqli_query($conn,$query))
      {
@@ -278,7 +283,7 @@ if(isset($_GET['name']))
         </div>
         <div class="cont">
           <div class="container-lg">
-            <div class="row rdet ">
+            <div class="row rdet">
               <div class="col-10 col-sm-6 col-md-6">
                 <h2><?php echo $row['name'];?></h2>
                 <h6 class="text-secondary">Phone.No: <?php echo $row['phone']; ?></h6>
@@ -299,8 +304,9 @@ if(isset($_GET['name']))
       <h3 class="text-secondary">Top Menu Items</h3>
       <div class="container-lg">
         <section class="center slider">
-            <?php
-             $query1 = "SELECT * FROM `catdetails` ORDER BY RAND() LIMIT 6";
+        <?php
+            //  $query1 = "SELECT * FROM `catdetails` ORDER BY RAND() LIMIT 6";
+             $query1 = "SELECT * FROM `fooditems` WHERE `restaurant`='$name' LIMIT 6";
              if($qrun1 = mysqli_query($conn,$query1))
              {
                while($row1 = mysqli_fetch_assoc($qrun1))
@@ -311,7 +317,8 @@ if(isset($_GET['name']))
                   <img src="<?php echo $row1['image']; ?>" style="width:100%">
                 </div>
                 <div class="crd-text">
-                  <p class="text-dark"><?php echo $row1['title']; ?></p>
+                  <!-- <p class="text-dark"><?php //echo $row1['title']; ?></p> -->
+                  <p class="text-dark"><?php echo $row1['item']; ?></p>
                 </div>
               </div> 
                <?php
@@ -340,9 +347,16 @@ if(isset($_GET['name']))
           echo '<button class="accordion" style="font-weight:bold;">'.$value.'</button>';
           echo '<div class="panel">';
           echo '<div id="divCard" class="row icard">';
-          $query3 = "SELECT * FROM `fooditems` WHERE `itemType`='$value' && `restaurant`='$name'";
+          $query3 = "SELECT * FROM `fooditems` WHERE `itemType`='$value' AND `restaurant`='$name'";
           if($qrun3 = mysqli_query($conn,$query3))
           {
+            $num = mysqli_num_rows($qrun3);
+            if($num<1)
+            {
+              echo '<button class="btn btn-primary">Items will be added later..!</button>'; 
+            }
+            else
+            {
             while($row3 = mysqli_fetch_assoc($qrun3))
             {
               echo '<div class="card col-sm-5 col-md-5 icards">';
@@ -351,17 +365,26 @@ if(isset($_GET['name']))
               echo '<img src="'.$row3['image'].'" alt="" width="150px" height="140px">';
               echo '</section>';
               echo '<div>';
+              // echo '<h6 class="card-title" style="">'.$row3['title'].'</h6>';
               echo '<h6 class="card-title" style="">'.$row3['item'].'</h6>';
               echo '<div style="height:70px;overflow:auto;">';
               echo '<p class="card-text" style="">'.$row3['description'].'</p>';
               echo '</div>';
+              echo '<span class="badge badge-primary ml-2">'.$row3['rating'].'</span>';
+              ?>
+              <span class="badge badge-danger ml-2">Rs.<?php echo $row3['cost']; ?></span>
+              <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row3['item']; ?>" name="quan<?php echo $row3['item']; ?>">
+              <?php
               echo '<div style="float:right;margin-bottom:0px;">';
-              echo '<button onclick="add();" class="btn btn-secondary">Add+</button>';
+              ?>
+             <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>');" class="btn btn-secondary">Add+</button>
+              <?php
               echo '</div>'; 
               echo '</div>'; 
               echo '</div>'; 
               echo '</div>'; 
             }
+          }
           }
           echo '</div>';
           echo '</div>';
@@ -385,9 +408,16 @@ if(isset($_GET['name']))
         foreach($catd as $x => $val)
         {
           echo '<h4 class="col-12 text-center"><span style="border-bottom:1px solid black; font-size:40px;">'.$val.'</span></h4>';
-          $query4 = "SELECT * FROM `fooditems` WHERE `itemType`='$val' && `restaurant`='$name'";
+          $query4 = "SELECT * FROM `fooditems` WHERE `itemType`='$val' AND `restaurant`='$name'";
           if($qrun4 = mysqli_query($conn,$query4))
           {
+            $num = mysqli_num_rows($qrun4);
+            if($num<1)
+            {
+              echo '<button class="btn btn-primary">Items will be added later..!</button>'; 
+            }
+            else
+            {
             while($row4 = mysqli_fetch_assoc($qrun4))
             {
               ?>
@@ -397,12 +427,16 @@ if(isset($_GET['name']))
                   <img src="<?php echo $row4['image']; ?>" alt="" width="150px" height="140px">
                 </section>
                 <div>
+                  <!-- <h6 class="card-title" style=""><?php //echo $row4['title']; ?></h6> -->
                   <h6 class="card-title" style=""><?php echo $row4['item']; ?></h6>
                   <div style="height:70px;overflow:auto;">
                     <p class="card-text" style=""><?php echo $row4['description']; ?></p>
                   </div>
+                  <span class="badge badge-primary ml-2"><?php echo $row4['rating']; ?></span>
+                  <span class="badge badge-danger ml-2">Rs.<?php echo $row4['cost']; ?></span>
+                  <input class="ml-2" type="number" placeholder="Quantity" id="quanD<?php echo $row4['item']; ?>" name="quanD<?php echo $row4['item']; ?>">
                   <div style="float:right;margin-bottom:0px;">
-                    <button onclick="add();" class="btn btn-secondary">Add+</button>
+                    <button onclick="add('<?php echo $row4['item']; ?>',document.getElementById('quanD<?php echo $row4['item']; ?>').value,<?php echo $row4['cost']; ?>,'<?php echo $row4['image']; ?>');" class="btn btn-secondary">Add+</button>
                   </div>
                 </div>
               </div>
@@ -410,19 +444,17 @@ if(isset($_GET['name']))
               <?php
             }
           }
+          }
         }
         echo '</div>';
         echo '</div>';
     ?>
-  </div>
   <div class="dtitle"><span class="title">ABOUT</span></div>
  <?php require_once('about.php');?>
-  </div>
-  </div>
   <div class="dtitle"><span class="title">REVIEWS</span></div>
  <?php require_once('review.php');?>
-  </div>
       <div id="snackbar">Signin to continue...</div>
+      <div id="snackbarR" style="background-color:green;"></div>
       <?php require_once('footer.php'); ?>
 </body>
   <script type="text/javascript" src="js/slick.js"></script>
@@ -473,11 +505,27 @@ if(isset($_GET['name']))
         });
       }
 
-      function add()
+      function add(str,quan,cost,img)
     {
+      // item = str;
       if(auth!="")
       {
-      window.open("https://google.com",'_blank');
+      // window.open("https://google.com",'_blank');
+      var x = document.getElementById("snackbarR");
+      /*cart*/
+       var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function()
+       {
+         if(xhttp.readyState==4 && xhttp.status==200)
+         {
+            x.innerHTML = xhttp.responseText;
+         }
+       }
+       xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img,true);
+       xhttp.send();
+      /*-----*/
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
       }
       else
       {
@@ -491,6 +539,7 @@ if(isset($_GET['name']))
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
       }
     }
+
 
   </script>
 </html>

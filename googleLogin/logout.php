@@ -3,6 +3,6 @@
  unset($_SESSION['access_token']);
  $gClient->revokeToken();
  session_destroy();
- header('Location:http://localhost/fprjct/hpage.php');
+ header('Location:http://localhost/fprjct/index.php');
  exit();
 ?>

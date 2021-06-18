@@ -1,4 +1,4 @@
- .navbar .nav-link {
+.navbar .nav-link {
   font-size: 15px;
   margin-left: 10px;
 }
@@ -112,7 +112,7 @@ form.ex input[type=text]{
      display:flex;
      align-items:center;
      justify-content:center;
-     margin-top:60px;
+     margin-top:0px;
      height:400px;
      width:100%;
      background-image:url('../images/hero.jpg');
@@ -145,13 +145,12 @@ form.ex input[type=text]{
     .slick-next:before {
       color: black;
     }
-   
     .icard
     {
      display:flex;
      flex-wrap:wrap;
-     flex-direction: start;
-     justify-content: space-between;
+     flex-direction: row;
+     justify-content: center;
     }
     .icards
     {
@@ -161,8 +160,8 @@ form.ex input[type=text]{
     .icards:hover
     {
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      /* transition:1s; */
-    }
+     /* transition:1s;  */
+    } 
 .crd
 {
   height:180px;
@@ -360,6 +359,14 @@ form.ex input[type=text]{
   
 }
 
+@media (min-width: 370px) and (max-width: 400px)
+{
+  .open
+  {
+    left:82%;
+  }
+}
+
 @media (min-width: 320px) and (max-width: 480px)
     {
       .hero
@@ -422,7 +429,7 @@ form.ex input[type=text]{
 
 }
 
-@media (max-width: 319px)
+@media (max-width: 320px)
 {
   #mNav
       {
@@ -436,5 +443,19 @@ form.ex input[type=text]{
      {
        display:block;
      }
+     .open
+     {
+       left:79%;
+     }
     
 }
+
+/* @media (min-width: 240px) and (max-width: 320px)
+{
+   .open
+   {
+     left:80%;
+   }
+} */
+
+

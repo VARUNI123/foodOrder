@@ -3,7 +3,7 @@
  $loginUrl = $gClient->createAuthUrl();
  if(isset($_SESSION['access_token']))
  {
-   header('Location:http://localhost/fprjct/hpage.php');
+   header('Location:http://localhost/fprjct/index.php');
  }
  else
  {

@@ -34,11 +34,14 @@ elseif($type=="Restaurants")
  </style>
  </head>
  <body>
-<div id="mNav">
-    <?php require('mobileNav.php'); ?>
-  </div>
-  <div id="lNav">
-    <?php require('navbar.php'); ?>
+<!-- <div id="mNav">
+<?php // require('mobileNav.php'); ?>
+  </div> -->
+  <!-- <div id="lNav">
+     //require('navbar.php'); ?>
+  </div> -->
+  <div>
+    <?php require_once('navbarM.php'); ?>
   </div>
    <div class="hero">
     <div class="hero-text">

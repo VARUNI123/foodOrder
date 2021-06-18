@@ -13,6 +13,10 @@ if(isset($_GET['category']))
 {
   $cat = $_GET['category'];
 }
+if(isset($_POST['quantity']))
+{
+  $quan = $_POST['quantity'];
+}
 ?>
 <html>
   <head>
@@ -67,7 +71,7 @@ if(isset($_GET['category']))
       padding:2px;
     }
 
-#snackbar {
+    #snackbar,#snackbarR {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
@@ -79,10 +83,12 @@ if(isset($_GET['category']))
   position: fixed;
   z-index: 1;
   left: 50%;
+  transform:translateX(-18%);
   bottom: 30px;
 }
 
-#snackbar.show {
+
+#snackbar.show,#snackbarR.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -146,11 +152,17 @@ if(isset($_GET['category']))
   </style>
   </head>
   <body>
-  <div id="lNav">
-    <?php require('navbar.php'); ?>
+   <!-- <div id="mNav">
+   <?php // require('mobileNav.php'); ?>
+  </div> -->
+  <!-- <div id="lNav">
+     //require('navbar.php'); ?>
+  </div> -->
+  <div>
+    <?php require_once('navbarM.php'); ?>
   </div>
-   <div id="itemNav">
-   <nav class="navbar navbar-inverse fixed-top bg-light">
+   <!-- <div id="itemNav"> -->
+   <!-- <nav class="navbar navbar-inverse fixed-top bg-light">
      <a class="navbar-brand" href=""><img src="images/logo.png" height="50px" width="50px"></a>
      <div class="search">
        <form>
@@ -159,32 +171,32 @@ if(isset($_GET['category']))
          </div>
        </form>
      </div>
-   </nav>
+   </nav> -->
   </div>
-  <div class="sidebar">
+  <!-- <div class="sidebar">
     <div class="iSide">
-     <div class=""><a href="http://localhost/fprjct/hpage.php"><i class="fa fa-home"></i>&nbsp;Home</a></div>
+     <div class=""><a href="http://localhost/fprjct/index.php"><i class="fa fa-home"></i>&nbsp;Home</a></div>
      <?php
-      if(!$auth)
-      {
+     // if(!$auth)
+     // {
       ?>
      <div class=""><a style="text-decoration: none;"  href="http://localhost/fprjct/googleLogin/login.php"><i class="fa fa-sign-in"></i>&nbsp;Login</a></div>
       <?php
-      }
-      else
-      {
+     // }
+     // else
+     // {
       ?>
      <div class=""><a style="text-decoration: none;" href="http://localhost/fprjct/googleLogin/logout.php"><i class="fa fa-pencil-square-o"></i>&nbsp;Sign Out</a></div>
      <div class=""><a style="text-decoration: none;" href="http://localhost/fprjct/profile.php"><i class="fa fa-user"></i>&nbsp;Profile</a>
       <?php
-      }
+     // }
       ?>
       <div id="openS" class="open" onclick="openSide();">
        <i class="fa fa-arrow-right"></i>
      </div>
     </div>
    </div>
-  </div>
+  </div> -->
   <div class="hero">
     <div class="hero-text">
      <?php
@@ -197,7 +209,11 @@ if(isset($_GET['category']))
       else
       {
       ?>
-      <h1 class="text-dark text-center"><?php echo $_SESSION['name']; ?>&nbsp;Enjoy food recipes by ordering from here...!</h1>
+      <h1 class="text-dark text-center">
+      <?php 
+        echo $_SESSION['name']; 
+      ?>
+      &nbsp;Enjoy food recipes by ordering from here...!</h1>
       <?php
       }
       ?>
@@ -231,8 +247,11 @@ if(isset($_GET['category']))
            <div style="height:70px;overflow:auto;">
            <p class="card-text" style=""><?php echo $row['description']; ?></p>
            </div>
-           <div style="float:right;margin-bottom:0px;">
-           <button onclick="add();" class="btn btn-secondary">Add+</button>
+           <span class="badge badge-primary ml-2"><?php echo $row['rating']; ?></span>
+           <span class="badge badge-danger ml-2">Rs.<?php echo $row['cost']; ?></span>
+           <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row['item']; ?>" name="quan<?php echo $row['item']; ?>">
+           <div style="float:right;margin-bottom:0px;margin-top:5px;">
+              <button onclick="add('<?php echo $row['item']; ?>',document.getElementById('quan<?php echo $row['item']; ?>').value,<?php echo $row['cost']; ?>,'<?php echo $row['image']; ?>')" class="btn btn-secondary">Add+</button>
            </div>
          </div>
        </div>
@@ -244,6 +263,7 @@ if(isset($_GET['category']))
    </div>
   </div>
   <div id="snackbar">Signin to continue...</div>
+  <div id="snackbarR" style="background-color:green;"></div>
   <?php require_once('footer.php'); ?>
   </body>
   <script>
@@ -285,11 +305,27 @@ if(isset($_GET['category']))
       xhttp.open('GET','fType.php?category='+fCat+'&ftype='+str,true);
       xhttp.send();
     }
-    function add()
+    function add(str,quan,cost,img)
     {
+      // item = str;
       if(auth!="")
       {
-      window.open("https://google.com",'_blank');
+      // window.open("https://google.com",'_blank');
+      var x = document.getElementById("snackbarR");
+      /*cart*/
+       var xhttp = new XMLHttpRequest();
+       xhttp.onreadystatechange = function()
+       {
+         if(xhttp.readyState==4 && xhttp.status==200)
+         {
+            x.innerHTML = xhttp.responseText;
+         }
+       }
+       xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img,true);
+       xhttp.send();
+      /*-----*/
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
       }
       else
       {

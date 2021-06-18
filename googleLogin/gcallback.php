@@ -4,7 +4,7 @@
  if(isset($_SESSION['access_token']))
  {
    $gClient->setAccessToken($_SESSION['access_token']);
-  // header('Location:http://localhost:8080/fprjct/hpage.php');
+  // header('Location:http://localhost:8080/fprjct/index.php');
  }
  elseif(isset($_GET['code']))
  {
@@ -13,7 +13,7 @@
  }
   else
   {
-    header('Location:http://localhost/fprjct/hpage.php');
+    header('Location:http://localhost/fprjct/index.php');
   }
  $oAuth = new Google_Service_Oauth2($gClient);
  $userData = $oAuth->userinfo_v2_me->get();
@@ -29,6 +29,6 @@
 
   $url = $_SESSION['url'];
 
-  //header('Location:http://localhost:8080/fprjct/hpage.php');
+  //header('Location:http://localhost:8080/fprjct/index.php');
   header('Location:'.$url.'');
 ?>
