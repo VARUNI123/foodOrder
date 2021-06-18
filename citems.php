@@ -231,7 +231,8 @@ if(isset($_POST['quantity']))
   <div class="container-lg mt-2">
    <div id="divCard" class="row icard">
      <?php
-       $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat'";
+      //  $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat'";
+      $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat' GROUP BY `item` ORDER BY `id`";
        if($qrun = mysqli_query($conn,$query))
        {
          while($row = mysqli_fetch_assoc($qrun))

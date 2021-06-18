@@ -6,7 +6,8 @@ $type = $_GET['ftype'];
 if($type=="")
 {
 //  $query = "SELECT * FROM `catdetails` WHERE `category`='$cat'";
-$query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat'";
+// $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat'";
+ $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat' GROUP BY `item` ORDER BY `id`";
  if($qrun = mysqli_query($conn,$query))
  {
    while($row = mysqli_fetch_assoc($qrun))
@@ -41,7 +42,7 @@ $query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat'";
 else
 {
 // $query = "SELECT * FROM `catdetails` WHERE `category`='$cat' AND `ftype`='$type'";
-$query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat' AND `fType`='$type'";
+$query = "SELECT * FROM `fooditems` WHERE `itemType`='$cat' AND `fType`='$type' GROUP BY `item` ORDER BY `id`";
 if($qrun = mysqli_query($conn,$query))
 {
   while($row = mysqli_fetch_assoc($qrun))
