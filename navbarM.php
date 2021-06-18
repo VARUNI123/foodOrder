@@ -237,7 +237,7 @@ nav .search-icon{
         <div class="nav-items">
           <li><a href="index.php">Home</a></li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="contactus/contact.php">Contact Us</a></li>
           <?php
             if($auth)
             //if(isset($_SESSION['access_token']))
