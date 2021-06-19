@@ -74,6 +74,7 @@ elseif($type=="Restaurants")
  {
    while($row = mysqli_fetch_assoc($qrun))
    {
+     $iType = $row['title'];
    ?>
     <div class="card col-sm-5 col-md-3 icards">
       <a class="stretched-link text-decoration-none" href="http://localhost/fprjct/<?php echo $link.$row['title']; ?>"></a>
@@ -83,7 +84,20 @@ elseif($type=="Restaurants")
             <div class="row">
               <div class="card-title col-7 col-sm-8 col-md-8"><h5><?php echo $row['title']; ?></h5></div>
               <div class="card-text col-3 col-sm-3 col-md-4">
-               <p class="badge badge-danger"><?php echo $row['count']; ?></p>
+               <!-- <p class="badge badge-danger"><?php// echo $row['count']; ?></p> -->
+               <?php
+                  if($type == "Categories")
+                  {
+                      $query1 = "SELECT `item` FROM `fooditems` WHERE `itemType`='$iType' GROUP BY `item`";
+                      if($qrn = mysqli_query($conn,$query1))
+                      {
+                        $count = mysqli_num_rows($qrn);
+                          ?>
+                  <p class="badge badge-danger"><?php echo $count; ?></p>
+                  <?php
+                      }
+                  }
+               ?>
               </div>
             </div>
           </div>
