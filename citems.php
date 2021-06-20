@@ -248,11 +248,28 @@ if(isset($_POST['quantity']))
            <div style="height:70px;overflow:auto;">
            <p class="card-text" style=""><?php echo $row['description']; ?></p>
            </div>
+           <div class="form-group" style="width:200px;float:right;">
+              <select class="form-control bg-light" data-role="select-dropdown" id="res<?php echo $row['item']; ?>">
+                <option value="" selected>Choose a Restaurant</option>
+                <?php 
+                  $queryRes = "SELECT `restaurant` FROM `fooditems` WHERE `item`='".$row['item']."' AND `itemType`='$cat'";
+                  if($qrunRes = mysqli_query($conn,$queryRes))
+                  {
+                    while($resRow = mysqli_fetch_assoc($qrunRes))
+                    {
+                      ?>
+                      <option value="<?php echo $resRow['restaurant']; ?>"><?php echo $resRow['restaurant']; ?></option>
+                      <?php
+                    }
+                  }
+                ?>
+              </select>
+          </div>
            <span class="badge badge-primary ml-2"><?php echo $row['rating']; ?></span>
            <span class="badge badge-danger ml-2">Rs.<?php echo $row['cost']; ?></span>
            <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row['item']; ?>" name="quan<?php echo $row['item']; ?>">
            <div style="float:right;margin-bottom:0px;margin-top:5px;">
-              <button onclick="add('<?php echo $row['item']; ?>',document.getElementById('quan<?php echo $row['item']; ?>').value,<?php echo $row['cost']; ?>,'<?php echo $row['image']; ?>')" class="btn btn-secondary">Add+</button>
+              <button onclick="add('<?php echo $row['item']; ?>',document.getElementById('quan<?php echo $row['item']; ?>').value,<?php echo $row['cost']; ?>,'<?php echo $row['image']; ?>',document.getElementById('res<?php echo $row['item']; ?>').options[document.getElementById('res<?php echo $row['item']; ?>').selectedIndex].value)" class="btn btn-secondary">Add+</button>
            </div>
          </div>
        </div>
@@ -306,7 +323,7 @@ if(isset($_POST['quantity']))
       xhttp.open('GET','fType.php?category='+fCat+'&ftype='+str,true);
       xhttp.send();
     }
-    function add(str,quan,cost,img)
+    function add(str,quan,cost,img,restaurant)
     {
       // item = str;
       if(auth!="")
@@ -322,7 +339,7 @@ if(isset($_POST['quantity']))
             x.innerHTML = xhttp.responseText;
          }
        }
-       xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img,true);
+       xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img+'&res='+restaurant,true);
        xhttp.send();
       /*-----*/
       x.className = "show";
