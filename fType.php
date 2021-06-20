@@ -23,6 +23,7 @@ if($type=="")
      echo '<p class="card-text" style="">'.$row['description'].'</p>';
      echo '</div>';
      ?>
+         <!-- Choosing a Restaurant -->
            <div class="form-group" style="width:200px;float:right;">
               <select class="form-control bg-light" data-role="select-dropdown" id="res<?php echo $row['item']; ?>">
                 <option value="" selected>Choose a Restaurant</option>
@@ -40,6 +41,7 @@ if($type=="")
                 ?>
               </select>
           </div>
+        <!-- ----------------------------------------   -->
            <span class="badge badge-primary ml-2"><?php echo $row['rating']; ?></span>
            <span class="badge badge-danger ml-2">Rs.<?php echo $row['cost']; ?></span>
            <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row['item']; ?>" name="quan<?php echo $row['item']; ?>">
@@ -75,6 +77,7 @@ if($qrun = mysqli_query($conn,$query))
     echo '<p class="card-text" style="">'.$row['description'].'</p>';
     echo '</div>';
     ?>
+          <!-- Choosing a Restaurant -->
            <div class="form-group" style="width:200px;float:right;">
               <select class="form-control bg-light" data-role="select-dropdown" id="res<?php echo $row['item']; ?>">
                 <option value="" selected>Choose a Restaurant</option>
@@ -92,6 +95,7 @@ if($qrun = mysqli_query($conn,$query))
                 ?>
               </select>
           </div>
+         <!-- ----------------------------------------   -->
            <span class="badge badge-primary ml-2"><?php echo $row['rating']; ?></span>
            <span class="badge badge-danger ml-2">Rs.<?php echo $row['cost']; ?></span>
            <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row['item']; ?>" name="quan<?php echo $row['item']; ?>">

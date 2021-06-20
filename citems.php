@@ -248,6 +248,7 @@ if(isset($_POST['quantity']))
            <div style="height:70px;overflow:auto;">
            <p class="card-text" style=""><?php echo $row['description']; ?></p>
            </div>
+          <!-- Choosing a Restaurant -->
            <div class="form-group" style="width:200px;float:right;">
               <select class="form-control bg-light" data-role="select-dropdown" id="res<?php echo $row['item']; ?>">
                 <option value="" selected>Choose a Restaurant</option>
@@ -265,6 +266,7 @@ if(isset($_POST['quantity']))
                 ?>
               </select>
           </div>
+          <!-- ----------------------------------------   -->
            <span class="badge badge-primary ml-2"><?php echo $row['rating']; ?></span>
            <span class="badge badge-danger ml-2">Rs.<?php echo $row['cost']; ?></span>
            <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row['item']; ?>" name="quan<?php echo $row['item']; ?>">
