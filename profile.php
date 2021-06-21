@@ -123,6 +123,7 @@ else
                   Quantity:<span class="badge badge-danger"><?php echo $row['quan']; ?></span>
                   <span class="badge badge-danger ml-2">Rs.<?php echo $row['cost']; ?></span><br>
                   Total cost: <span class="badge badge-success mt-4 ml-2">Rs.<?php echo $row['quan'] * $row['cost']; ?></span>
+                 <span class="btn btn-primary">From: <?php echo $row['restaurant']; ?></span>
                   <div style="float:right;margin-bottom:0px;">
                    <a href="http://localhost/fprjct/cartRemove.php?removeitem=<?php echo $row['citem']; ?>"><button class="btn btn-danger">Remove</button></a>
                   </div>

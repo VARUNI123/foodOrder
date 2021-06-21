@@ -365,14 +365,14 @@ if(isset($_GET['name']))
               echo '<div style="height:70px;overflow:auto;">';
               echo '<p class="card-text" style="">'.$row3['description'].'</p>';
               echo '</div>';
-              echo '<span class="badge badge-primary ml-2">'.$row3['rating'].'</span>';
               ?>
+              <span class="badge badge-primary ml-2"><?php echo $row3['rating']; ?></span>
               <span class="badge badge-danger ml-2">Rs.<?php echo $row3['cost']; ?></span>
               <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row3['item']; ?>" name="quan<?php echo $row3['item']; ?>">
               <?php
               echo '<div style="float:right;margin-bottom:0px;">';
               ?>
-             <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>');" class="btn btn-secondary">Add+</button>
+             <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>','<?php echo $row3['restaurant']; ?>');" class="btn btn-secondary">Add+</button>
               <?php
               echo '</div>'; 
               echo '</div>'; 
@@ -431,7 +431,7 @@ if(isset($_GET['name']))
                   <span class="badge badge-danger ml-2">Rs.<?php echo $row4['cost']; ?></span>
                   <input class="ml-2" type="number" placeholder="Quantity" id="quanD<?php echo $row4['item']; ?>" name="quanD<?php echo $row4['item']; ?>">
                   <div style="float:right;margin-bottom:0px;">
-                    <button onclick="add('<?php echo $row4['item']; ?>',document.getElementById('quanD<?php echo $row4['item']; ?>').value,<?php echo $row4['cost']; ?>,'<?php echo $row4['image']; ?>');" class="btn btn-secondary">Add+</button>
+                    <button onclick="add('<?php echo $row4['item']; ?>',document.getElementById('quanD<?php echo $row4['item']; ?>').value,<?php echo $row4['cost']; ?>,'<?php echo $row4['image']; ?>','<?php echo $row4['restaurant']; ?>');" class="btn btn-secondary">Add+</button>
                   </div>
                 </div>
               </div>
@@ -500,7 +500,7 @@ if(isset($_GET['name']))
         });
       }
 
-      function add(str,quan,cost,img)
+      function add(str,quan,cost,img,restaurant)
     {
       // item = str;
       if(auth!="")
@@ -516,7 +516,7 @@ if(isset($_GET['name']))
             x.innerHTML = xhttp.responseText;
          }
        }
-       xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img,true);
+       xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img+'&res='+restaurant,true);
        xhttp.send();
       /*-----*/
       x.className = "show";
