@@ -22,6 +22,9 @@ elseif($type=="Restaurants")
   $link = 'restaurant.php?name=';
   //$link = 'resSample.php?name=';
 }
+elseif($type=="Offers"){
+  $link = 'oitems.php?otype1=';
+}
 ?>
 <!doctype html>
 <html>
