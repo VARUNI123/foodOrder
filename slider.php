@@ -11,7 +11,7 @@
      </a>
     </div>
     <div class="crd border border-light">
-     <a class="text-decoration-none" href="http://localhost/fprjct/index.php">
+     <a class="text-decoration-none" href="http://localhost/fprjct/categories.php?type=Offers">
       <div class="crd-body">
         <img src="images/offer.jpg" style="width:100%">
       </div>

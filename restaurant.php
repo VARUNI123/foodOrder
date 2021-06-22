@@ -260,12 +260,7 @@ if(isset($_GET['name']))
     </style>
   </head>
   <body>
-   <!-- <div id="mNav">
-   <?php  //require('mobileNav.php'); ?>
-  </div> -->
-  <!-- <div id="lNav">
-     //require('navbar.php'); ?>
-  </div> -->
+   
   <div>
     <?php require_once('navbarM.php'); ?>
   </div>
