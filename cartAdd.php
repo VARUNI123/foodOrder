@@ -6,28 +6,17 @@ if($auth!="")
 {
   $email = $_SESSION['email'];
 }
-if(isset($_GET['cartitem']))
+if(isset($_GET['cartitem']) && isset($_GET['quan']) && isset($_GET['cost']) && isset($_GET['img']) && isset($_GET['res']))
 {
   $item = $_GET['cartitem'];
-}
-if(isset($_GET['quan']))
-{
   $quan = $_GET['quan'];
-}
-if(isset($_GET['cost']))
-{
   $cost = $_GET['cost'];
-}
-if(isset($_GET['img']))
-{
   $img = $_GET['img'];
-}
-if(isset($_GET['res']))
-{
   $res = $_GET['res'];
 }
 
-$query1 = "SELECT * FROM `cartitems` WHERE `citem` = '$item' AND `email` = '$email'";
+
+$query1 = "SELECT * FROM `cartitems` WHERE `citem` = '$item' AND `email` = '$email' AND `restaurant` = '$res'";
 if($qrun1 = mysqli_query($conn,$query1))
 {
   $num = mysqli_num_rows($qrun1);
@@ -37,6 +26,9 @@ if($qrun1 = mysqli_query($conn,$query1))
     {
       echo "Please add the item quantity you want..!";
 // please add item quantity
+    }
+    else if($res==""){
+      echo "Please select the restaurant to add item into cart..!";
     }
     else
     {
@@ -48,7 +40,12 @@ if($qrun1 = mysqli_query($conn,$query1))
     }
   }
   else{
-    echo '<span style="font-weight:bold;">'.$item.'</span> is already added to the cart..!';
+    $query3 = "UPDATE `cartitems` SET `quan`='$quan' WHERE `citem` = '$item'";
+    // echo '<span style="font-weight:bold;">'.$item.'</span> is already added to the cart..!';
+    if($qrun3 = mysqli_query($conn,$query3))
+      {
+        echo '<span style="font-weight:bold;">'.$item.'</span> quantity UPDATED in the cart successfully..!';
+      }
   }
 }
 else{
