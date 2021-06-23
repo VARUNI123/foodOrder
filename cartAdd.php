@@ -25,7 +25,6 @@ if($qrun1 = mysqli_query($conn,$query1))
     if($quan=="")
     {
       echo "Please add the item quantity you want..!";
-// please add item quantity
     }
     else if($res==""){
       echo "Please select the restaurant to add item into cart..!";
