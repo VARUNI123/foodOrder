@@ -75,7 +75,7 @@ else
               $num = mysqli_num_rows($qrun);
               if($num<1)
               {
-                echo '<div style="display:flex;justify-content:center;"><div style="margin-top:20px;"><a href="http://localhost/fprjct/categories.php?type=Restaurants"><button class="btn btn-primary">There is nothing in the cart. Click to add..!</button></a></div></div>'; 
+                echo '<div style="display:flex;align-items:center;justify-content:center;height:100%;"><a href="http://localhost/fprjct/categories.php?type=Restaurants"><img class="" src="images/emptyCart.jpg" width="220px" height="220px"></a></div>'; 
               }
               else
               {
