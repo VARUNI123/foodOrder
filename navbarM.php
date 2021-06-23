@@ -10,6 +10,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style type="text/css">
 
     @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
@@ -235,7 +236,7 @@ nav .search-icon{
       <div class="logo"><a href="index.php" style="text-decoration:none;color:white;">Food4U</a></div>
 
         <div class="nav-items">
-          <li><a href="index.php">Home</a></li>
+          <li><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="contactus/contact.php">Contact Us</a></li>
           <?php
@@ -243,13 +244,14 @@ nav .search-icon{
             //if(isset($_SESSION['access_token']))
             {
             ?>
-          <li><a href="http://localhost/fprjct/googleLogin/logout.php"><i class="fa fa-pencil-square-o"></i>&nbsp;Sign Out</a></li>
+          <li><a href="http://localhost/fprjct/cartDisplay.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart</a></li>
+          <li><a href="http://localhost/fprjct/googleLogin/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Sign Out</a></li>
             <?php
             }
             else
             {
             ?>
-          <li><a href="http://localhost/fprjct/googleLogin/login.php"><i class="fa fa-pencil-square-o"></i>&nbsp;Sign In</a></li>
+          <li><a href="http://localhost/fprjct/googleLogin/login.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign In</a></li>
             <?php
             }
             ?>

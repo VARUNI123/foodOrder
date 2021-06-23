@@ -16,5 +16,5 @@ $rquery = "DELETE FROM `cartitems` WHERE `citem` = '$remitem' AND `email` = '$em
 if($rqrun = mysqli_query($conn,$rquery))
 {
   // echo '<span style="font-weight:bold;">'.$remitem.'</span> removed from the cart successfully..!';
-  header('Location:http://localhost/fprjct/profile.php');
+  header('Location:http://localhost/fprjct/cartDisplay.php');
 }
