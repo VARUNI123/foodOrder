@@ -104,7 +104,7 @@ else
                   <td><span class="badge badge-danger m-auto">Rs.<?php echo $row['cost']; ?></span><br></td>
                   <td><span class="badge badge-danger"><?php echo $row['quan']; ?></span></td>
                   <td><span class="badge badge-success mt-4 m-auto">Rs.<?php echo $row['quan'] * $row['cost']; ?></span></td>
-                  <td><a href="http://localhost/fprjct/cartRemove.php?removeitem=<?php echo $row['citem']; ?>"><button class="btn btn-danger">Remove</button></a></td>
+                  <td><a href="http://localhost/fprjct/cartRemove.php?removeitem=<?php echo $row['citem'];?>&removeres=<?php echo $row['restaurant'];?>"><button class="btn btn-danger">Remove</button></a></td>
                 </tr>
                 <?php
                 }
