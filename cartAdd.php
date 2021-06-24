@@ -25,7 +25,6 @@ if($qrun1 = mysqli_query($conn,$query1))
     if($quan=="")
     {
       echo "Please add the item quantity you want..!";
-// please add item quantity
     }
     else if($res==""){
       echo "Please select the restaurant to add item into cart..!";
@@ -44,7 +43,7 @@ if($qrun1 = mysqli_query($conn,$query1))
     // echo '<span style="font-weight:bold;">'.$item.'</span> is already added to the cart..!';
     if($qrun3 = mysqli_query($conn,$query3))
       {
-        echo '<span style="font-weight:bold;">'.$item.'</span>quantity UPDATED in the cart successfully..!';
+        echo '<span style="font-weight:bold;">'.$item.'</span> quantity UPDATED in the cart successfully..!';
       }
   }
 }
