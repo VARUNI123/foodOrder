@@ -44,7 +44,7 @@ textarea {
 
 .star1, .star2, .star3, .star4, .star5 {
   margin-right: 5px;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
@@ -117,6 +117,19 @@ textarea {
   }
   .checked{
       color:orange;
+  }
+  @media (max-width:1080px){
+    .rbox{
+      width:90%;
+      height:50%;
+      background-attachment:fixed;
+    }
+    .inputbox{
+      width:25%
+    }
+    .stars{
+      flex-direction:row;
+    }
   }
     </style>
 </head>

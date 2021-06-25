@@ -136,7 +136,7 @@ if(isset($_GET['name']))
 
 /* map styles */
 .mapouter{
-  position:relative;
+  position:fixed;
   text-align:center;
   width:100vw;
   height:400px;
@@ -144,6 +144,7 @@ if(isset($_GET['name']))
 .gmap_canvas {
     overflow:hidden;
     background:none!important;
+    background-attachment:fixed;
     width:100vw;
     height:400px;
 }
@@ -494,11 +495,6 @@ if(isset($_GET['name']))
                     </div>
                   </div>
                </div>
-        
-                <!--  -->
-
-
-
                   <span class="badge badge-primary ml-2"><?php echo $row4['rating']; ?></span>
                   <span class="badge badge-danger ml-2">Rs.<?php echo $row4['cost']; ?></span>
                   <div style="float:right;margin-bottom:0px;">

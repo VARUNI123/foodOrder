@@ -1,5 +1,5 @@
 <?php
-/*session_start();*/
+//session_start();
 require_once('googleLogin/config.php');
 
 $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
@@ -59,12 +59,12 @@ if(isset($_POST['quantity']))
       margin-top:10px;
     }
 
-        .card-title{
-            margin-bottom:0;
-            padding:2px;
-            margin-left:40%;
-            font-size:20px;
-        }
+     .card-title{
+       margin-bottom:0;
+       padding:2px;
+       margin-left:40%;
+       font-size:20px;
+    }
     .card-text
     {
       margin-left:10px;
@@ -145,7 +145,7 @@ if(isset($_POST['quantity']))
       }
       .card-text
       {
-        /*margin-left:130px;*/
+        /margin-left:130px;/
       }
        section img
       {
@@ -372,7 +372,7 @@ if(isset($_POST['quantity']))
       {
       // window.open("https://google.com",'_blank');
       var x = document.getElementById("snackbarR");
-      /*cart*/
+      /cart/
        var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function()
        {
@@ -383,7 +383,7 @@ if(isset($_POST['quantity']))
        }
        xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img+'&res='+restaurant,true);
        xhttp.send();
-      /*-----*/
+      /-----/
       x.className = "show";
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
       }
