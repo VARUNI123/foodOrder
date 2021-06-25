@@ -145,7 +145,7 @@ if(isset($_POST['quantity']))
       }
       .card-text
       {
-        /margin-left:130px;/
+        /*margin-left:130px;*/
       }
        section img
       {
@@ -372,7 +372,7 @@ if(isset($_POST['quantity']))
       {
       // window.open("https://google.com",'_blank');
       var x = document.getElementById("snackbarR");
-      /cart/
+      /*cart*/
        var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function()
        {
@@ -383,7 +383,7 @@ if(isset($_POST['quantity']))
        }
        xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img+'&res='+restaurant,true);
        xhttp.send();
-      /-----/
+      /*-----*/
       x.className = "show";
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
       }
