@@ -122,7 +122,7 @@ if(isset($_GET['name']))
   border-radius: 2px;
   padding: 16px;
   position: fixed;
-  z-index: 1;
+  z-index: 999999;
   left: 50%;
   transform:translateX(-18%);
   bottom: 30px;
@@ -366,13 +366,48 @@ if(isset($_GET['name']))
               echo '<p class="card-text" style="">'.$row3['description'].'</p>';
               echo '</div>';
               ?>
+
+                <!--  Modal  -->
+                <div class="modal fade" id="<?php echo str_replace(" ","",$row3['item']); ?>">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title ml-3">Select Categories</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body" style="display:flex;justify-content:center;">
+                          <div class="card" style="width:400px;">
+                            <img class="card-img-top" src="<?php echo $row3['image']; ?>" alt="Card image" style="width:100%;height:250px;">
+                            <div class="card-body" style="display:flex;flex-wrap:wrap;">
+                              <h4 class="card-title text-center"><?php echo $row3['item']; ?></h4>
+                              <!-- <p class="card-text"><?php //echo $row['description']; ?></p> -->
+                              <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row3['item']; ?>" name="quan<?php echo $row3['item']; ?>">
+                          </div>
+                          </div>
+                        </div>
+                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                          <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>','<?php echo $row3['restaurant']; ?>');" class="btn btn-secondary">Add+</button>
+                        </div> 
+                    </div>
+                  </div>
+               </div>
+        
+                <!--  -->
+
               <span class="badge badge-primary ml-2"><?php echo $row3['rating']; ?></span>
               <span class="badge badge-danger ml-2">Rs.<?php echo $row3['cost']; ?></span>
-              <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row3['item']; ?>" name="quan<?php echo $row3['item']; ?>">
+              <!-- <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php //echo $row3['item']; ?>" name="quan<?php //echo $row3['item']; ?>"> -->
               <?php
               echo '<div style="float:right;margin-bottom:0px;">';
               ?>
-             <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>','<?php echo $row3['restaurant']; ?>');" class="btn btn-secondary">Add+</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo str_replace(" ","",$row3['item']); ?>">Proceed to Cart</button>
               <?php
               echo '</div>'; 
               echo '</div>'; 
@@ -427,11 +462,48 @@ if(isset($_GET['name']))
                   <div style="height:70px;overflow:auto;">
                     <p class="card-text" style=""><?php echo $row4['description']; ?></p>
                   </div>
+
+                <!--  Modal  -->
+                <div class="modal fade" id="des<?php echo str_replace(" ","",$row4['item']); ?>">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title ml-3">Select Categories</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body" style="display:flex;justify-content:center;">
+                          <div class="card" style="width:400px;">
+                            <img class="card-img-top" src="<?php echo $row4['image']; ?>" alt="Card image" style="width:100%;height:250px;">
+                            <div class="card-body" style="display:flex;flex-wrap:wrap;">
+                              <h4 class="card-title text-center"><?php echo $row4['item']; ?></h4>
+                              <!-- <p class="card-text"><?php //echo $row['description']; ?></p> -->
+                            <input class="" style="width:100%" type="number" placeholder="Quantity" id="quanD<?php echo $row4['item']; ?>" name="quanD<?php echo $row4['item']; ?>">
+                          </div>
+                          </div>
+                        </div>
+                        
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                          <button onclick="add('<?php echo $row4['item']; ?>',document.getElementById('quanD<?php echo $row4['item']; ?>').value,<?php echo $row4['cost']; ?>,'<?php echo $row4['image']; ?>','<?php echo $row4['restaurant']; ?>');" class="btn btn-warning">Add+</button>
+                        </div> 
+                    </div>
+                  </div>
+               </div>
+        
+                <!--  -->
+
+
+
                   <span class="badge badge-primary ml-2"><?php echo $row4['rating']; ?></span>
                   <span class="badge badge-danger ml-2">Rs.<?php echo $row4['cost']; ?></span>
-                  <input class="ml-2" type="number" placeholder="Quantity" id="quanD<?php echo $row4['item']; ?>" name="quanD<?php echo $row4['item']; ?>">
                   <div style="float:right;margin-bottom:0px;">
-                    <button onclick="add('<?php echo $row4['item']; ?>',document.getElementById('quanD<?php echo $row4['item']; ?>').value,<?php echo $row4['cost']; ?>,'<?php echo $row4['image']; ?>','<?php echo $row4['restaurant']; ?>');" class="btn btn-secondary">Add+</button>
+                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#des<?php echo str_replace(" ","",$row4['item']); ?>">Proceed to Cart</button>
+                    <!-- <button onclick="add('<?php //echo $row4['item']; ?>',document.getElementById('quanD<?php //echo $row4['item']; ?>').value,<?php //echo $row4['cost']; ?>,'<?php //echo $row4['image']; ?>','<?php //echo $row4['restaurant']; ?>');" class="btn btn-secondary">Add+</button> -->
                   </div>
                 </div>
               </div>

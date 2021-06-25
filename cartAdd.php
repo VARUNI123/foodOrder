@@ -38,13 +38,21 @@ if($qrun1 = mysqli_query($conn,$query1))
       }
     }
   }
-  else{
-    $query3 = "UPDATE `cartitems` SET `quan`='$quan' WHERE `citem` = '$item'";
-    // echo '<span style="font-weight:bold;">'.$item.'</span> is already added to the cart..!';
-    if($qrun3 = mysqli_query($conn,$query3))
+  else
+  {
+    if($quan!="")
+    {
+      $query3 = "UPDATE `cartitems` SET `quan`='$quan' WHERE `citem` = '$item'";
+      // echo '<span style="font-weight:bold;">'.$item.'</span> is already added to the cart..!';
+      if($qrun3 = mysqli_query($conn,$query3))
       {
         echo '<span style="font-weight:bold;">'.$item.'</span> quantity UPDATED in the cart successfully..!';
       }
+    }
+    else
+    {
+      echo "Please add the item quantity you want..!";
+    }
   }
 }
 else{

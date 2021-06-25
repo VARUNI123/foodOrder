@@ -88,7 +88,7 @@ else
                       <th>From</th>
                       <th>Cost of each item</th>
                       <th>Quantity</th>
-                      <th>Total cost</th>
+                      <th>Sub Total</th>
                       <th>Action</th>
                     <tr>
                   </thead>
@@ -104,7 +104,7 @@ else
                   <td><span class="badge badge-danger m-auto">Rs.<?php echo $row['cost']; ?></span><br></td>
                   <td><span class="badge badge-danger"><?php echo $row['quan']; ?></span></td>
                   <td><span class="badge badge-success mt-4 m-auto">Rs.<?php echo $row['quan'] * $row['cost']; ?></span></td>
-                  <td><a href="http://localhost/fprjct/cartRemove.php?removeitem=<?php echo $row['citem']; ?>"><button class="btn btn-danger">Remove</button></a></td>
+                  <td><a href="http://localhost/fprjct/cartRemove.php?removeitem=<?php echo $row['citem']; ?>&removeres=<?php echo $row['restaurant'];?>"><button class="btn btn-danger"><i class="fa fa-trash fa-lg"></i></button></a></td>
                 </tr>
                 <?php
                 }
@@ -129,7 +129,7 @@ else
                             echo '<span class="badge badge-primary">Rs.'.$total.'</span>';
                           ?>
                         </h4>
-                        <button class="btn btn-warning col-10 col-sm-5 col-md-5 mt-2">Proceed To Buy</button>
+                        <button class="btn btn-warning col-10 col-sm-5 col-md-5 mt-2 mb-2">Proceed To Checkout</button>
                     </div>
                 </div>
                 <?php
