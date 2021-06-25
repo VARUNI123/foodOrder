@@ -16,7 +16,7 @@ if(isset($_GET['cartitem']) && isset($_GET['quan']) && isset($_GET['cost']) && i
 }
 
 
-$query1 = "SELECT * FROM `cartitems` WHERE `citem` = '$item' AND `email` = '$email' AND `restaurant` = '$res'";
+$query1 = "SELECT * FROM `cartitems` WHERE `citem` = '$item' AND `email` = '$email' AND `restaurant` ='$res'";
 if($qrun1 = mysqli_query($conn,$query1))
 {
   $num = mysqli_num_rows($qrun1);

@@ -162,6 +162,5 @@ if(isset($_GET['otype1']))
      }
     }
     ?>
-    
 </body>
 </html>
