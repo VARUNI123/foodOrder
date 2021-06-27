@@ -53,6 +53,21 @@ else
       height:100%;
       width:100%;
     }
+
+    @media (min-width:768px)
+    {
+      .pincode
+      {
+        margin-left:20px;
+      }
+    }
+    @media (max-width:248px)
+    {
+      .city_input,.pincode_input
+      {
+        width:80%;
+      }
+    }
     </style>
   </head>
   <body>
@@ -146,16 +161,38 @@ else
                                     
                                     <!-- Modal body -->
                                     <div class="modal-body" style="">
-                                      <form action="cartbill.php" method="POST">
-                                            <label for="name" class="" style="font-weight:bold;">Name:</label>
-                                            <input type="text" id="name" value="<?php echo $_SESSION['name']; ?>" class="">
+                                      <form action="cartDisplay.php" method="POST">
+                                            <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-user"></i>&nbsp;Name:</label>
+                                            <input type="text" id="name" required style="border:1px solid black;border-radius:5px;" value="<?php echo $_SESSION['name']; ?>" class="col-10">
+                                            <label for="email" class="col-12" style="font-weight:bold;"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email:</label>
+                                            <input type="text" id="email" required style="border:1px solid black;border-radius:5px;" value="<?php echo $_SESSION['email']; ?>" class="col-10"><br>
+                                            <label for="phone" class="col-12" style="font-weight:bold;"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Phone:</label>
+                                            <input type="number" id="phone" name="phone" placeholder="Phone" required style="border:1px solid black;border-radius:5px;"  class="col-10"><br>
+                                            <label for="address" class="col-12" style="font-weight:bold;"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;Address</label>
+                                            <textarea name="address" id="address" required style="border:1px solid black;border-radius:5px;width:85%;height:150px;" placeholder="Address"></textarea>
+                                            <div class="row mt-2">
+                                              <div class="col-sm-12 col-md-5">
+                                                <label for="city" class="" style="font-weight:bold;">&nbsp;City:</label>
+                                                <input type="text" id="city" name="city" required style="border:1px solid black;border-radius:5px;" placeholder="City" class="city_input">
+                                              </div>
+                                              <div class="col-sm-12 col-md-5 pincode">
+                                                <label for="pincode" class="" style="font-weight:bold;">&nbsp;Pincode:</label>
+                                                <input type="number" id="pincode" required name="pincode" style="border:1px solid black;border-radius:5px;" placeholder="Pincode" class="pincode_input">
+                                              </div>
+                                            </div>
+                                            <br>
+                                            <h6 style="font-weight:bold;text-decoration:underline;">Payment Type:</h6>
+                                            <label for="cod" style="font-weight:bold;">COD</label>
+                                            <input type="radio" required name="payment_type" id="cod" value="cod">
+                                            <label for="card" style="font-weight:bold;margin-left:30px;">Online</label>
+                                            <input type="radio" required name="payment_type" id="card" value="card">
+                                            <div class="modal-footer">
+                                              <input type="submit" value="Submit" class="btn btn-success">
+                                            </div> 
                                       </form>
                                     </div>
                                     
                                     <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div> 
                                 </div>
                               </div>
                            </div>

@@ -266,7 +266,7 @@ if(isset($_POST['quantity']))
                     <!-- Modal body -->
                     <div class="modal-body" style="display:flex;justify-content:center;">
                       <div class="card" style="width:400px;">
-                        <img class="card-img-top" src="<?php echo $row['image']; ?>" alt="Card image" style="width:100%;height:250px;">
+                        <img class="card-img-top" src="<?php echo $row['image']; ?>" loading="lazy" alt="Card image" style="width:100%;height:250px;">
                         <div class="card-body" style="display:flex;flex-wrap:wrap;">
                           <h4 class="card-title text-center"><?php echo $row['item']; ?></h4>
                           <!-- <p class="card-text"><?php //echo $row['description']; ?></p> -->
