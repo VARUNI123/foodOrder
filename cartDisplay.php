@@ -11,6 +11,10 @@ else
 <html>
   <head>
     <?php require('links.php'); ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
     .table
     {
@@ -129,7 +133,34 @@ else
                             echo '<span class="badge badge-primary">Rs.'.$total.'</span>';
                           ?>
                         </h4>
-                        <button class="btn btn-warning col-10 col-sm-5 col-md-5 mt-2 mb-2">Proceed To Checkout</button>
+                        <!--Billing Modal-->
+                            <div class="modal fade" id="mymodal">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                      <h4 class="modal-title ml-3">Billing Form</h4>
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    
+                                    <!-- Modal body -->
+                                    <div class="modal-body" style="">
+                                      <form action="cartbill.php" method="POST">
+                                            <label for="name" class="" style="font-weight:bold;">Name:</label>
+                                            <input type="text" id="name" value="<?php echo $_SESSION['name']; ?>" class="">
+                                      </form>
+                                    </div>
+                                    
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div> 
+                                </div>
+                              </div>
+                           </div>
+                        <!--  -->
+                        <button type="button" class="btn btn-warning col-10 col-sm-5 col-md-5 mt-2 mb-2" data-toggle="modal" data-target="#mymodal">Proceed To Checkout</button>
                     </div>
                 </div>
                 <?php

@@ -136,19 +136,24 @@ if(isset($_GET['name']))
 
 /* map styles */
 .mapouter{
-  position:fixed;
+  position:relative;
   text-align:center;
-  width:100vw;
+  width:100%;
   height:400px;
 }
 .gmap_canvas {
     overflow:hidden;
     background:none!important;
+<<<<<<< HEAD
     width:100vw;
+=======
+    background-attachment:fixed;
+    width:100%;
+>>>>>>> b86069cbcf3e62c47d3f3e4f35de5e27a4cf8ad7
     height:400px;
 }
 .gmap_iframe{
-  width:100vw!important;
+  width:100%!important;
   height:400px!important;
 }
 .dtitle{
@@ -385,7 +390,7 @@ if(isset($_GET['name']))
                             <div class="card-body" style="display:flex;flex-wrap:wrap;">
                               <h4 class="card-title text-center"><?php echo $row3['item']; ?></h4>
                               <!-- <p class="card-text"><?php //echo $row['description']; ?></p> -->
-                              <input class="ml-2" type="number" placeholder="Quantity" id="quan<?php echo $row3['item']; ?>" name="quan<?php echo $row3['item']; ?>">
+                              <input class="" style="width:100%;" type="number" placeholder="Quantity" id="quan<?php echo $row3['item']; ?>" name="quan<?php echo $row3['item']; ?>">
                           </div>
                           </div>
                         </div>
@@ -393,7 +398,7 @@ if(isset($_GET['name']))
                         <!-- Modal footer -->
                         <div class="modal-footer">
                           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                          <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>','<?php echo $row3['restaurant']; ?>');" class="btn btn-secondary">Add+</button>
+                          <button onclick="add('<?php echo $row3['item']; ?>',document.getElementById('quan<?php echo $row3['item']; ?>').value,<?php echo $row3['cost']; ?>,'<?php echo $row3['image']; ?>','<?php echo $row3['restaurant']; ?>');" class="btn btn-warning">Add+</button>
                         </div> 
                     </div>
                   </div>
@@ -494,6 +499,7 @@ if(isset($_GET['name']))
                     </div>
                   </div>
                </div>
+               <!--  -->
                   <span class="badge badge-primary ml-2"><?php echo $row4['rating']; ?></span>
                   <span class="badge badge-danger ml-2">Rs.<?php echo $row4['cost']; ?></span>
                   <div style="float:right;margin-bottom:0px;">
