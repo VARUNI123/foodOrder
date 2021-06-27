@@ -1,5 +1,10 @@
 <?php
 require('connect.php');
+require_once('googleLogin/config.php');
+if(!isset($_SESSION['access_token']))
+{
+  header('Location:http://localhost/fprjct/index.php');
+}
 $cat = $_GET['category'];
 $type = $_GET['ftype'];
 //echo "<h1>".$cat."</h1>";
