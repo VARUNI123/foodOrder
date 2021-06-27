@@ -144,7 +144,6 @@ if(isset($_GET['name']))
 .gmap_canvas {
     overflow:hidden;
     background:none!important;
-    background-attachment:fixed;
     width:100vw;
     height:400px;
 }
