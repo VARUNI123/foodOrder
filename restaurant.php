@@ -144,12 +144,8 @@ if(isset($_GET['name']))
 .gmap_canvas {
     overflow:hidden;
     background:none!important;
-<<<<<<< HEAD
-    width:100vw;
-=======
     background-attachment:fixed;
     width:100%;
->>>>>>> b86069cbcf3e62c47d3f3e4f35de5e27a4cf8ad7
     height:400px;
 }
 .gmap_iframe{

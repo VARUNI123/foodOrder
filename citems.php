@@ -118,19 +118,19 @@ if(isset($_POST['quantity']))
   to {bottom: 0; opacity: 0;}
 }
 
-        @media (min-width: 481px) and (max-width: 767px)
-        {
-            section img{
-                width:125px;
-              /*  height:140px;*/
-            }
-            .card-title{
-                font-size:20px;
-            }
-            .card{
-                width:100%;
-            }
-        }
+@media (min-width: 481px) and (max-width: 767px)
+{
+  section img{
+      width:125px;
+      /*  height:140px;*/
+}
+.card-title{
+   font-size:20px;
+  }
+.card{
+      width:100%;
+  }
+}
 
     @media (min-width: 320px) and (max-width: 480px)
     {
@@ -372,13 +372,21 @@ if(isset($_POST['quantity']))
       {
       // window.open("https://google.com",'_blank');
       var x = document.getElementById("snackbarR");
+      var y = document.getElementById("list");
       /*cart*/
        var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function()
        {
          if(xhttp.readyState==4 && xhttp.status==200)
          {
+          
             x.innerHTML = xhttp.responseText;
+            // location.reload();
+            if(xhttp.responseText != str+" quantity UPDATED in the cart successfully..!"){
+             var z = parseInt(y.innerHTML);
+             z+=1;
+             y.innerHTML = z;
+            } 
          }
        }
        xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img+'&res='+restaurant,true);

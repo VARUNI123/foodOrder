@@ -250,7 +250,7 @@ nav .search-icon{
             //if(isset($_SESSION['access_token']))
             {
             ?>
-          <li><a href="http://localhost/fprjct/cartDisplay.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp; Cart<p class="badge badge-pill badge-success list"><?php echo $count;?></p></a></li>
+          <li><a href="http://localhost/fprjct/cartDisplay.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp; Cart<p class="badge badge-pill badge-success " id ="list"><?php echo $count;?></p></a></li>
           <li><a href="http://localhost/fprjct/googleLogin/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Sign Out</a></li>
             <?php
             }
