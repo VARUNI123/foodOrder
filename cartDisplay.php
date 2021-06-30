@@ -7,6 +7,34 @@ if(!isset($_SESSION['access_token']))
 }
 else
 {
+  if(isset($_POST['submit']))
+  {
+    $phone = mysqli_real_escape_string($conn,$_POST['phone_num']);
+    $address = mysqli_real_escape_string($conn,$_POST['address']);
+    $city = mysqli_real_escape_string($conn,$_POST['city']);
+    $pincode = mysqli_real_escape_string($conn,$_POST['pincode']);
+    $payment = mysqli_real_escape_string($conn,$_POST['payment_type']);
+    $total_price = mysqli_real_escape_string($conn,$_POST['total_price']);
+    $payment_status = "pending";
+    if($payment=="cod")
+    {
+      $payment_status="success";
+    }
+    $order_status="pending";
+    $added_on=date('Y-m-d h:i:s');
+    $i_email = mysqli_real_escape_string($conn,$_POST['email']);
+    $item_status=1;
+
+    $billQuery = "INSERT INTO `billing` (phone_num,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on) VALUES ($phone,'$address','$city',$pincode,'$payment',$total_price,'$payment_status','$order_status','$added_on')";
+    $im_query = "UPDATE `cartitems` SET `item_status`=$item_status WHERE `email`='$i_email'";
+    if(mysqli_query($conn,$im_query) && mysqli_query($conn,$billQuery))
+    {
+      $char = random_bytes(10);
+      $hex = bin2hex($char);
+      $_SESSION['hex'] = $hex;
+      header('Location:success.php?thanks='.$hex);
+    }
+   }
 ?>
 <html>
   <head>
@@ -88,7 +116,7 @@ else
            {
              $email = $_SESSION['email'];
            }
-           $query = "SELECT * FROM `cartitems` WHERE `email` = '$email'";
+           $query = "SELECT * FROM `cartitems` WHERE `email` = '$email' AND `item_status`=0";
            if($qrun = mysqli_query($conn,$query))
             {
               $num = mysqli_num_rows($qrun);
@@ -99,7 +127,7 @@ else
               else
               {
                 ?>
-                <table class="table table-hover table-bordered mt-2 ">
+                <table class="table table-hover table-bordered mt-2">
                   <thead>
                     <tr>
                       <th>Image</th>
@@ -133,7 +161,7 @@ else
                   <div class="row" style="display:flex;justify-content:center;">
                         <h4 class="ml-2 mt-2 col-10 col-sm-5 col-md-5">Total Amount: 
                           <?php 
-                            $total = 0;
+                            $total=0;
                             if(empty($cost))
                             {
                               $total = 0;
@@ -162,12 +190,16 @@ else
                                     <!-- Modal body -->
                                     <div class="modal-body" style="">
                                       <form action="cartDisplay.php" method="POST">
-                                            <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-user"></i>&nbsp;Name:</label>
-                                            <input type="text" id="name" required style="border:1px solid black;border-radius:5px;" value="<?php echo $_SESSION['name']; ?>" class="col-10">
-                                            <label for="email" class="col-12" style="font-weight:bold;"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email:</label>
-                                            <input type="text" id="email" required style="border:1px solid black;border-radius:5px;" value="<?php echo $_SESSION['email']; ?>" class="col-10"><br>
-                                            <label for="phone" class="col-12" style="font-weight:bold;"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Phone:</label>
-                                            <input type="number" id="phone" name="phone" placeholder="Phone" required style="border:1px solid black;border-radius:5px;"  class="col-10"><br>
+                                            <?php
+                                              $total_price = $total;
+                                            ?>
+                                            <!-- <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-user"></i>&nbsp;Name:</label>
+                                            <input type="text" id="name" required style="border:1px solid black;border-radius:5px;" value="<?php //echo $_SESSION['name']; ?>" class="col-10">
+                                            <label for="email" class="col-12" style="font-weight:bold;"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email:</label>-->
+                                            <input type="hidden" name="email" required style="border:1px solid black;border-radius:5px;" value="<?php echo $_SESSION['email']; ?>" class="col-10">
+                                            <input type="hidden"  name="total_price" value="<?php echo $total; ?>" required style="border:1px solid black;border-radius:5px;"  class="col-10">
+                                            <label for="phone" class="col-12" style="font-weight:bold;"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Phone:</label> 
+                                            <input type="number" id="phone" name="phone_num" placeholder="Phone" required style="border:1px solid black;border-radius:5px;"  class="col-10"><br>
                                             <label for="address" class="col-12" style="font-weight:bold;"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;Address</label>
                                             <textarea name="address" id="address" required style="border:1px solid black;border-radius:5px;width:85%;height:150px;" placeholder="Address"></textarea>
                                             <div class="row mt-2">
@@ -187,7 +219,7 @@ else
                                             <label for="card" style="font-weight:bold;margin-left:30px;">Online</label>
                                             <input type="radio" required name="payment_type" id="card" value="card">
                                             <div class="modal-footer">
-                                              <input type="submit" value="Submit" class="btn btn-success">
+                                              <input type="submit" value="Submit" name="submit" class="btn btn-success">
                                             </div> 
                                       </form>
                                     </div>
