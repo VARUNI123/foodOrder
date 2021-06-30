@@ -381,8 +381,8 @@ if(isset($_POST['quantity']))
          {
           
             x.innerHTML = xhttp.responseText;
-            // location.reload();
-            if(xhttp.responseText != str+" quantity UPDATED in the cart successfully..!"){
+            //location.reload();
+            if(xhttp.responseText == '<span style="font-weight:bold;">'+str+'</span> added to the cart successfully..!'){
              var z = parseInt(y.innerHTML);
              z+=1;
              y.innerHTML = z;

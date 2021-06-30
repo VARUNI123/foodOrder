@@ -1,10 +1,14 @@
 <?php
-  $auth = isset($_SESSION['access_token']);
   require_once('connect.php');
-  $query1 = "SELECT * FROM `cartitems` ";
-  if($qrun1 = mysqli_query($conn,$query1))
+  $auth = isset($_SESSION['access_token']);
+  if($auth!="")
   {
-    $count = mysqli_num_rows($qrun1);
+    $email = $_SESSION['email'];
+    $query1 = "SELECT * FROM `cartitems` WHERE `email`='$email' AND `item_status`=0 ";
+    if($qrun1 = mysqli_query($conn,$query1))
+    {
+      $count = mysqli_num_rows($qrun1);
+    }
   }
 ?>
 <!DOCTYPE html>
