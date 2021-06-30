@@ -46,7 +46,7 @@ if($qrun1 = mysqli_query($conn,$query1))
       // echo '<span style="font-weight:bold;">'.$item.'</span> is already added to the cart..!';
       if($qrun3 = mysqli_query($conn,$query3))
       {
-        echo $item.' quantity UPDATED in the cart successfully..!';
+        echo '<span style="font-weight:bold;">'.$item.'</span> quantity UPDATED in the cart successfully..!';
       }
     }
     else

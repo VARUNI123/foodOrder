@@ -576,6 +576,7 @@ if(isset($_GET['name']))
       {
       // window.open("https://google.com",'_blank');
       var x = document.getElementById("snackbarR");
+      var y = document.getElementById("list");
       /*cart*/
        var xhttp = new XMLHttpRequest();
        xhttp.onreadystatechange = function()
@@ -583,6 +584,11 @@ if(isset($_GET['name']))
          if(xhttp.readyState==4 && xhttp.status==200)
          {
             x.innerHTML = xhttp.responseText;
+            if(xhttp.responseText == '<span style="font-weight:bold;">'+str+'</span> added to the cart successfully..!'){
+             var z = parseInt(y.innerHTML);
+             z+=1;
+             y.innerHTML = z;
+            } 
          }
        }
        xhttp.open('GET','cartAdd.php?cartitem='+str+'&quan='+quan+'&cost='+cost+'&img='+img+'&res='+restaurant,true);
