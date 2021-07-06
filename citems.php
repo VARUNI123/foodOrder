@@ -8,6 +8,8 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
 
 
 $auth = isset($_SESSION['access_token']);
+$dbauth= isset($_SESSION['userid']);
+
  require('connect.php');
 if(isset($_GET['category']))
 {
@@ -18,6 +20,7 @@ if(isset($_POST['quantity']))
   $quan = $_POST['quantity'];
 }
 ?>
+
 <html>
   <head>
     <?php require('links.php'); ?>
@@ -329,6 +332,7 @@ if(isset($_POST['quantity']))
   <script>
     fCat = "<?php echo $cat; ?>";
     auth = "<?php echo $auth; ?>";
+    dbauth = "<?php echo $dbauth;?>";
    // alert(fCat);
     function openSide()
      {
@@ -368,7 +372,7 @@ if(isset($_POST['quantity']))
     function add(str,quan,cost,img,restaurant)
     {
       // item = str;
-      if(auth!="")
+      if(auth!="" || dbauth!="")
       {
       // window.open("https://google.com",'_blank');
       var x = document.getElementById("snackbarR");

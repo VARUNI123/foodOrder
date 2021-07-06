@@ -1,10 +1,20 @@
 <?php
+$dbauth =isset($_SESSION['userid']);
   require_once('connect.php');
   $auth = isset($_SESSION['access_token']);
+  $dbauth = isset($_SESSION['userid']);
   if($auth!="")
   {
     $email = $_SESSION['email'];
     $query1 = "SELECT * FROM `cartitems` WHERE `email`='$email' AND `item_status`=0 ";
+    if($qrun1 = mysqli_query($conn,$query1))
+    {
+      $count = mysqli_num_rows($qrun1);
+    }
+  }
+  else if($dbauth!=""){
+    $dbemail = $_SESSION['dbemail'];
+    $query1 = "SELECT * FROM `cartitems` WHERE `email`='$dbemail' AND `item_status`=0 ";
     if($qrun1 = mysqli_query($conn,$query1))
     {
       $count = mysqli_num_rows($qrun1);
@@ -238,7 +248,8 @@ nav .search-icon{
 </style>
   </head>
   <body>
-    <nav > 
+  
+    <nav> 
         <div class="menu-icon">
             <span style="color:white;" class="fas fa-bars"></span>
         </div>
@@ -250,7 +261,7 @@ nav .search-icon{
           <li><a href="#">About</a></li>
           <li><a href="contactus/contact.php">Contact Us</a></li>
           <?php
-            if($auth)
+            if($auth || $dbauth)
             //if(isset($_SESSION['access_token']))
             {
             ?>
@@ -258,6 +269,7 @@ nav .search-icon{
           <li><a href="http://localhost/fprjct/googleLogin/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Sign Out</a></li>
             <?php
             }
+           
             else
             {
             ?>
@@ -287,8 +299,13 @@ nav .search-icon{
         if($auth)
         {
         ?>
-      <li><a style="text-decoration:none;" href="http://localhost/fprjct/profile.php">&nbsp;<img class="rounded-circle" src="<?php echo $_SESSION['picture']; ?>" width="50px" height="50px"></a></li>
+      <li><a style="text-decoration:none;" href="http://localhost/fprjct/userpro.php">&nbsp;<img class="rounded-circle" src="<?php echo $_SESSION['picture']; ?>" width="50px" height="50px"></a></li>
         <?php
+        }
+        else if($dbauth){
+          ?>
+          <li><a style="text-decoration:none;color:white;" href="http://localhost/fprjct/userpro.php">&nbsp;<?php echo $_SESSION['user_name'];?></a></li>
+          <?php
         }
       ?>
     </div>

@@ -7,6 +7,7 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
 				$_SERVER['REQUEST_URI'];
 
         $auth = isset($_SESSION['access_token']);
+        $dbauth= isset($_SESSION['userid']);
 if(isset($_GET['otype1']))
 {
   $otype1 = $_GET['otype1'];

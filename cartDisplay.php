@@ -1,7 +1,7 @@
 <?php
 require_once('connect.php');
 require_once('googleLogin/config.php');
-if(!isset($_SESSION['access_token']))
+if(!isset($_SESSION['access_token']) && !isset($_SESSION['userid']))
 {
   header('Location:http://localhost/fprjct/index.php');
 }
@@ -112,10 +112,14 @@ else
     <div class="table-responsive">
         <?php
            $auth = isset($_SESSION['access_token']);
+           $dbauth= isset($_SESSION['userid']);
            if($auth!="")
            {
              $email = $_SESSION['email'];
            }
+           else if($dbauth !=""){
+            $email = $_SESSION['dbemail'];
+          }
            $query = "SELECT * FROM `cartitems` WHERE `email` = '$email' AND `item_status`=0";
            if($qrun = mysqli_query($conn,$query))
             {

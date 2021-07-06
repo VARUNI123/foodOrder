@@ -2,9 +2,13 @@
 require_once('connect.php');
 require_once('googleLogin/config.php');
 $auth = isset($_SESSION['access_token']);
+$dbauth= isset($_SESSION['userid']);
 if($auth!="")
 {
   $email = $_SESSION['email'];
+}
+else if($dbauth !=""){
+  $email = $_SESSION['dbemail'];
 }
 if(isset($_GET['cartitem']) && isset($_GET['quan']) && isset($_GET['cost']) && isset($_GET['img']) && isset($_GET['res']))
 {

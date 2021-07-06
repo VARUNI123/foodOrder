@@ -7,6 +7,7 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
 				$_SERVER['REQUEST_URI'];
 
         $auth = isset($_SESSION['access_token']);
+        $dbauth= isset($_SESSION['userid']);
 if(isset($_GET['name']))
 {
   $name = $_GET['name'];
@@ -552,7 +553,7 @@ if(isset($_GET['name']))
       });
 
       auth = "<?php echo $auth; ?>";
-
+      dbauth ="<?php echo $dbauth; ?>";
       var acc = document.getElementsByClassName("accordion");
       var i;
 
@@ -572,7 +573,7 @@ if(isset($_GET['name']))
       function add(str,quan,cost,img,restaurant)
     {
       // item = str;
-      if(auth!="")
+      if(auth!="" || dbauth!="")
       {
       // window.open("https://google.com",'_blank');
       var x = document.getElementById("snackbarR");
