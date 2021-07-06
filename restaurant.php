@@ -359,7 +359,7 @@ if(isset($_GET['name']))
               echo '<div class="card col-sm-5 col-md-5 icards">';
               echo '<div class="card-body">';
               echo '<section style="float:left;">';
-              echo '<img src="'.$row3['image'].'" alt="" width="150px" height="140px">';
+              echo '<img src="'.$row3['image'].'" alt="" width="150px" height="140px" data-aos="flip-left">';
               echo '</section>';
               echo '<div>';
               // echo '<h6 class="card-title" style="">'.$row3['title'].'</h6>';
