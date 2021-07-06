@@ -589,7 +589,6 @@ if(isset($_GET['name']))
          if(xhttp.readyState==4 && xhttp.status==200)
          {
             x.innerHTML = xhttp.responseText;
-
             if(xhttp.responseText == '<span style="font-weight:bold;">'+str+'</span> added to the cart successfully..!'){
              var z = parseInt(y.innerHTML);
              z+=1;
