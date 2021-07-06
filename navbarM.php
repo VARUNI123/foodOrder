@@ -125,6 +125,36 @@ nav .search-icon{
   display: none;
 }
 
+/*dropdown*/
+.dropdown-content
+{
+  display:none;
+  right:5px;
+  margin-top:5px;
+  position:absolute;
+  background-color: #f1f1f1;
+  width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index:1;
+}
+.dropdown-content a
+{
+  display:block;
+  text-decoration:none;
+  color:black;
+  padding:12px 16px;
+}
+.dropdown-content a:hover
+{
+  color:orange;
+}
+.drpbtn:hover .dropdown-content {display:block;}
+
+.oref
+{
+  display:none;
+}
+
 @media (max-width: 1245px) {
   nav{
     padding: 0 50px;
@@ -234,7 +264,25 @@ nav .search-icon{
     font-size: 16px;
   }
 }
-
+@media (max-width:304px)
+{
+  .pimage
+  {
+    width:30px;
+    height:30px;
+  }
+}
+@media (max-width:284px)
+{
+  .oref
+  {
+     display:block;
+  }
+  .pimage
+  {
+    display:none;
+  }
+}
 </style>
   </head>
   <body>
@@ -256,6 +304,9 @@ nav .search-icon{
             ?>
           <li><a href="http://localhost/fprjct/cartDisplay.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp; Cart<p class="badge badge-pill badge-success " id ="list"><?php echo $count;?></p></a></li>
           <li><a href="http://localhost/fprjct/googleLogin/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Sign Out</a></li>
+          <li class="oref"><a href="profile.php">Profile</a></a>
+          <li class="oref"><a href="order.php">Your order history</a></li>
+          <li class="oref"><a href="#">Track order</a></li>
             <?php
             }
             else
@@ -265,10 +316,6 @@ nav .search-icon{
             <?php
             }
             ?>
-         
-
-
-
             </div>
     <div class="search-icon">
         <span class="fas fa-search"></span>
@@ -287,12 +334,21 @@ nav .search-icon{
         if($auth)
         {
         ?>
-      <li><a style="text-decoration:none;" href="http://localhost/fprjct/profile.php">&nbsp;<img class="rounded-circle" src="<?php echo $_SESSION['picture']; ?>" width="50px" height="50px"></a></li>
+      <!-- <li><a style="text-decoration:none;" href="http://localhost/fprjct/profile.php">&nbsp;<img class="rounded-circle" src="<?php //echo $_SESSION['picture']; ?>" width="50px" height="50px"></a></li> -->
+      <li>
+        <div class="btn drpbtn">&nbsp;<img class="rounded-circle pimage" src="<?php echo $_SESSION['picture']; ?>" width="50px" height="50px">
+          <div class="dropdown-content">
+            <a href="profile.php">Profile</a>
+            <a href="order.php">Your order history</a>
+            <a href="#">Track order</a>
+          </div>
+        </div>
+      </li>
         <?php
         }
       ?>
     </div>
-    </nav> 
+    </nav>
     <script>
       const menuBtn = document.querySelector(".menu-icon span");
       const searchBtn = document.querySelector(".search-icon");

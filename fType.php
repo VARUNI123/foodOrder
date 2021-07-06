@@ -16,7 +16,9 @@ if($type=="")
      echo '<div class="card col-sm-5 col-md-5 icards">';
      echo '<div class="card-body">';
      echo '<section style="float:left">';
-     echo '<img src="'.$row['image'].'" alt="" width="150px" height="150px">';
+     ?>
+    <img src="<?php echo $row['image'] ?>" alt="" width="150px" height="140px">
+     <?php
      echo '</section>';
      echo '<div>';
      echo '<h6 class="card-title" style="">'.$row['item'].'</h6>';
@@ -88,7 +90,7 @@ if($type=="")
     //  echo '</div>';
      echo '</div>';
      echo '</div>';
-     echo '</div>';
+     echo '</div>';   
    }
  }
 }
@@ -103,7 +105,9 @@ if($qrun = mysqli_query($conn,$query))
     echo '<div class="card col-sm-5 col-md-5 icards">';
     echo '<div class="card-body">';
     echo '<section style="float:left">';
-    echo '<img src="'.$row['image'].'" alt="" width="150px" height="150px">';
+    ?>
+    <img src="<?php echo $row['image'] ?>" alt="" width="150px" height="140px">
+    <?php
     echo '</section>';
     echo '<div>';
     echo '<h6 class="card-title" style="">'.$row['item'].'</h6>';

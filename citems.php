@@ -49,6 +49,7 @@ if(isset($_POST['quantity']))
     .hero
     {
      background-image:url('images/itemHero.jpg');
+     background-attachment:fixed;
     }
     #iDrop
     {
@@ -245,7 +246,7 @@ if(isset($_POST['quantity']))
     <div class="card col-sm-5 col-md-5 icards">
        <div class="card-body">
          <section style="float:left">
-           <img src="<?php echo $row['image']; ?>" alt="" width="150px" height="140px">
+           <img src="<?php echo $row['image']; ?>" alt="" width="150px" height="140px" data-aos="flip-left">
          </section>
          <div>
            <h6 class="card-title" style=""><?php echo $row['item']; ?></h6>
@@ -325,6 +326,10 @@ if(isset($_POST['quantity']))
     <div id="snackbarR" style="background-color:green;"></div>
   </div>
   <?php require_once('footer.php'); ?>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   </body>
   <script>
     fCat = "<?php echo $cat; ?>";

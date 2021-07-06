@@ -34,6 +34,10 @@ elseif($type=="Offers"){
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <?php require('links.php'); ?>
  <style>
+  .hero
+  {
+    background-attachment:fixed;
+  }
  </style>
  </head>
  <body>
@@ -79,7 +83,7 @@ elseif($type=="Offers"){
    {
      $iType = $row['title'];
    ?>
-    <div class="card col-sm-5 col-md-3 icards">
+    <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
       <a class="stretched-link text-decoration-none" href="http://localhost/fprjct/<?php echo $link.$row['title']; ?>"></a>
         <img src="<?php echo $row['image']; ?>" alt="trending" height="200px" >
         <div class="card-body">
@@ -115,7 +119,10 @@ elseif($type=="Offers"){
 
   <!-- footer -->
   <?php require_once('footer.php'); ?>
-
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   <script type="text/javascript" src="js/slick.js"></script>
   <script type="text/javascript">
     $(".center").slick({
