@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
 				$_SESSION['userid']= $user['userid'];
 				$_SESSION['dbemail'] = $user['email'];
 				$_SESSION['user_name']=$lname;
+				$_SESSION['usertype'] = $user['usertype'];
 				echo '<script>
 					fdbauth = <?php echo $dbauth; ?>;
 					fdbmail= <?php echo $dbmail; ?>
@@ -38,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
 				</script>';
 				if($user['usertype']=='user')
 				{
+					
 					$valid="yes";
 					header("Location: ../index.php");
 					die;
@@ -45,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
 				else if($user['usertype'] =='admin')
 				{
 					$valid="yes";
-					header("Location: adminpage.php");
+					header("Location: ../adminpanel/index.php");
 					die;
 				}
                

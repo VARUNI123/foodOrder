@@ -29,6 +29,7 @@ if(isset($_GET['name']))
         background-position:center;
         background-repeat:no-repeat;
         background-size:cover;
+        background-attachment:fixed;
       }
       .rdet
       {
@@ -359,7 +360,7 @@ if(isset($_GET['name']))
               echo '<div class="card col-sm-5 col-md-5 icards">';
               echo '<div class="card-body">';
               echo '<section style="float:left;">';
-              echo '<img src="'.$row3['image'].'" alt="" width="150px" height="140px">';
+              echo '<img src="'.$row3['image'].'" alt="" width="150px" height="140px" data-aos="flip-left">';
               echo '</section>';
               echo '<div>';
               // echo '<h6 class="card-title" style="">'.$row3['title'].'</h6>';
@@ -456,7 +457,7 @@ if(isset($_GET['name']))
           <div class="card col-sm-5 col-md-5 icards">
               <div class="card-body">
                 <section style="float:left">
-                  <img src="<?php echo $row4['image']; ?>" alt="" width="150px" height="140px">
+                  <img src="<?php echo $row4['image']; ?>" alt="" width="150px" height="140px" data-aos="flip-left">
                 </section>
                 <div>
                   <!-- <h6 class="card-title" style=""><?php //echo $row4['title']; ?></h6> -->
@@ -521,6 +522,10 @@ if(isset($_GET['name']))
       <div id="snackbar">Signin to continue...</div>
       <div id="snackbarR" style="background-color:green;"></div>
       <?php require_once('footer.php'); ?>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
 </body>
   <script type="text/javascript" src="js/slick.js"></script>
   <script type="text/javascript">

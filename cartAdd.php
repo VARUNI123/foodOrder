@@ -18,6 +18,7 @@ if(isset($_GET['cartitem']) && isset($_GET['quan']) && isset($_GET['cost']) && i
   $img = $_GET['img'];
   $res = $_GET['res'];
   $item_status=0;
+  $order_id='pending';
 }
 
 
@@ -36,7 +37,7 @@ if($qrun1 = mysqli_query($conn,$query1))
     }
     else
     {
-      $query2 = "INSERT INTO `cartitems` (email,citem,image,quan,cost,restaurant,item_status) VALUES ('$email','$item','$img',$quan,$cost,'$res',$item_status)";
+      $query2 = "INSERT INTO `cartitems` (order_id,email,citem,image,quan,cost,restaurant,item_status) VALUES ('$order_id','$email','$item','$img',$quan,$cost,'$res',$item_status)";
       if($qrun2 = mysqli_query($conn,$query2))
       {
         echo '<span style="font-weight:bold;">'.$item.'</span> added to the cart successfully..!';

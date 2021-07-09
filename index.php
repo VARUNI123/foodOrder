@@ -17,6 +17,10 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
  <head>
    <?php require('links.php'); ?>
  <style>
+  .hero
+  {
+    background-attachment:fixed;
+  }
  </style>
  </head>
  <body>
@@ -54,9 +58,9 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
    <div class="container-lg">
     <h4 class="text-center"><span style="border-bottom:2px solid grey;">Collections</span></h4>
     <div class="row icard">
-      <div class="card col-sm-5 col-md-3 icards">
+      <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
       <a class="stretched-link text-decoration-none" href="#"></a>
-        <img src="images/trending.jpg" alt="trending" >
+        <img src="images/trending.jpg" alt="trending">
         <div class="card-body">
           <div class="card-content">
             <div class="card-title"><h4>Trending</h4></div>
@@ -66,9 +70,9 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
           </div>
         </div>
       </div>
-      <div class="card col-sm-5 col-md-3 icards">
+      <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
       <a class="stretched-link text-decoration-none" href=""></a>
-      <img src="images/near_res.jpg" alt="near by restaurants" >
+      <img src="images/near_res.jpg" alt="near by restaurants">
           <div class="card-body">
             <div class="card-content">
               <div class="card-title"><h4>Near by restaurants</h4></div>
@@ -78,7 +82,7 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
             </div>
           </div>
       </div>
-       <div class="card col-sm-5 col-md-3 icards">
+       <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
        <a class="stretched-link text-decoration-none" href="#"></a>
         <img src="images/popular.png" alt="popular food items" >
         <div class="card-body">
@@ -90,9 +94,9 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
           </div>
         </div>
       </div>
-      <div class="card col-sm-5 col-md-3 icards">
+      <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
       <a class="stretched-link text-decoration-none" href="#"></a>
-        <img src="images/meal.jpg" alt="Meal of the day" >
+        <img src="images/meal.jpg" alt="Meal of the day">
         <div class="card-body">
           <div class="card-content">
             <div class="card-title"><h4>Meal of the day</h4></div>
@@ -102,9 +106,9 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
           </div>
         </div>
       </div>
-      <div class="card col-sm-5 col-md-3 icards">
+      <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
       <a class="stretched-link text-decoration-none" href="#"></a>
-        <img src="images/pop_restaurant.jpg" alt="veg" >
+        <img src="images/pop_restaurant.jpg" alt="veg">
         <div class="card-body">
           <div class="card-content">
             <div class="card-title"><h4>Popular Restaurants</h4></div>
@@ -114,9 +118,9 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
           </div>
         </div>
       </div>
-       <div class="card col-sm-5 col-md-3 icards">
+       <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
        <a class="stretched-link text-decoration-none" href="#"></a>
-        <img src="images/bestdeal.jpg" alt="best Deal" >
+        <img src="images/bestdeal.jpg" alt="best Deal">
         <div class="card-body">
           <div class="card-content">
             <div class="card-title"><h4>Special Offers</h4></div>
@@ -130,7 +134,10 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
   </div>
   <!-- footer -->
   <?php require_once('footer.php'); ?>
-
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   <script type="text/javascript" src="js/slick.js"></script>
   <script type="text/javascript">
     $(".center").slick({

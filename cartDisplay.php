@@ -1,6 +1,7 @@
 <?php
 require_once('connect.php');
 require_once('googleLogin/config.php');
+date_default_timezone_set('Asia/Kolkata');
 if(!isset($_SESSION['access_token']) && !isset($_SESSION['userid']))
 {
   header('Location:http://localhost/fprjct/index.php');
@@ -15,18 +16,20 @@ else
     $pincode = mysqli_real_escape_string($conn,$_POST['pincode']);
     $payment = mysqli_real_escape_string($conn,$_POST['payment_type']);
     $total_price = mysqli_real_escape_string($conn,$_POST['total_price']);
-    $payment_status = "pending";
+    $payment_status = "success";
     if($payment=="cod")
     {
-      $payment_status="success";
+      $payment_status="pending";
     }
     $order_status="pending";
-    $added_on=date('Y-m-d h:i:s');
+    $added_on=date('Y-m-d H:i:s');
     $i_email = mysqli_real_escape_string($conn,$_POST['email']);
     $item_status=1;
+    $date =  date(DATE_COOKIE).' '.date('a');
+    $order_id = md5($date);
 
-    $billQuery = "INSERT INTO `billing` (phone_num,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on) VALUES ($phone,'$address','$city',$pincode,'$payment',$total_price,'$payment_status','$order_status','$added_on')";
-    $im_query = "UPDATE `cartitems` SET `item_status`=$item_status WHERE `email`='$i_email'";
+    $billQuery = "INSERT INTO `billing` (order_id,email,phone_num,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on) VALUES ('$order_id','$i_email',$phone,'$address','$city',$pincode,'$payment',$total_price,'$payment_status','$order_status','$added_on')";
+    $im_query = "UPDATE `cartitems` SET `item_status`=$item_status,`order_id`='$order_id' WHERE `email`='$i_email' AND `item_status`=0";
     if(mysqli_query($conn,$im_query) && mysqli_query($conn,$billQuery))
     {
       $char = random_bytes(10);
@@ -39,6 +42,7 @@ else
 <html>
   <head>
     <?php require('links.php'); ?>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -148,7 +152,7 @@ else
                 {
                     $cost[] = $row['quan'] * $row['cost'];
                 ?> 
-                <tr>
+                <tr data-aos="fade-right">
                   <td><img src="<?php echo $row['image']; ?>" alt="" width="150px" height="130px"></td>
                   <td><p class="text-dark" style="font-size:120%;" style=""><?php echo $row['citem']; ?></p></td>
                   <td><p class="text-dark" style="font-size:120%;"><?php echo $row['restaurant']; ?></p></td>
@@ -246,6 +250,10 @@ else
   <div class="load">
      <img src="images/foodload.gif" width="300px" height="300px">
   </div>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   </body>
   <script>
     $(document).ready(function(){
