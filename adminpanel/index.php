@@ -496,7 +496,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">BARGRAPH</h4>
+                    <h4 class="card-title">ANALYTICS</h4>
                     <?php 
                          $restArr = [];
                          $count = [];
@@ -514,19 +514,14 @@
                             if($qrun = mysqli_query($conn,$qr))
                             {
                                 $count[] = mysqli_num_rows($qrun);
-
                                 // echo $count.'<br>';
                             }
                          }
 
-                         $datapoints = array(
-                            //  for($i=0;$i<count($count);$i++)
-                            //  {
-                                // echo ('array("label"=>'.$restArr[$i].',"y"=>'.$count[$i].'),');
-                            // }
-                            // array("label"=>$restArr[0],"y"=>$count[0]),
-                            // array("label"=>$restArr[1],"y"=>$count[1]),
-                         );
+                         for($i=0;$i<count($restArr);$i++)
+                         {
+                             $datapoints[] = array("label"=>$restArr[$i], "y"=>$count[$i]);
+                         }
                         ?>
                     <script>
                         var restaurants = <?php echo json_encode($restArr); ?>;
@@ -534,20 +529,13 @@
                         window.onload = function () {
                             var chart = new CanvasJS.Chart("tree", {
                                 title:{
-                                    text: "My First Chart in CanvasJS"              
+                                    text: "Orders for Restaurants"              
                                 },
                                 data: [              
                                 {
                                     // Change type to "doughnut", "line", "splineArea", etc.
                                     type: "pie",
                                     dataPoints:<?php echo json_encode($datapoints); ?>
-                                    //  [
-                                        // { label: "apple",  y: 10  },
-                                        // { label: "orange", y: 15  },
-                                        // { label: "banana", y: 25  },
-                                        // { label: "mango",  y: 30  },
-                                        // { label: "grape",  y: 28  }
-                                    // ]
                                 }
                                 ]
                             });
@@ -555,27 +543,6 @@
                         }
                     </script>
                     <div id="tree">
-                        <!-- <img src="bargraph.svg"></img> -->
-                        <?php 
-                        //  $restArr = [];
-                        //  $q1 = "SELECT * FROM `restaurants`";
-                        //  if($qr1 = mysqli_query($conn,$q1))
-                        //  {
-                        //      while($row = mysqli_fetch_assoc($qr1))
-                        //      {
-                        //          $restArr[] = $row['name'];
-                        //      }
-                        //  }
-                        //  foreach($restArr as $restaurant)
-                        //  {
-                        //     $qr = "SELECT * FROM `cartitems` WHERE `restaurant`='$restaurant'";
-                        //     if($qrun = mysqli_query($conn,$qr))
-                        //     {
-                        //         $count = mysqli_num_rows($qrun);
-                        //         echo $count.'<br>';
-                        //     }
-                        //  }
-                        ?>
                     </div>
                 </div>
             </div>
