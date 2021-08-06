@@ -15,7 +15,6 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
    if($dbauth)
    {
      $usertype=$_SESSION['usertype'];
-     echo "<script>alert('$usertype');</script>";
      if($usertype==="admin")
      {
        header('Location:adminpanel/index.php');

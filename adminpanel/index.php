@@ -510,11 +510,12 @@
                          }
                          foreach($restArr as $restaurant)
                          {
-                            $qr = "SELECT * FROM `cartitems` WHERE `restaurant`='$restaurant'";
+                            // $qr = "SELECT * FROM `cartitems` WHERE `restaurant`='$restaurant'";
+                            $qr = "SELECT `order_id` FROM `cartitems` WHERE `restaurant`='$restaurant' GROUP BY `order_id`";
                             if($qrun = mysqli_query($conn,$qr))
                             {
                                 $count[] = mysqli_num_rows($qrun);
-                                // echo $count.'<br>';
+                                // echo $count[0].'<br>';
                             }
                          }
 
