@@ -204,7 +204,7 @@ else
                                             <!-- <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-user"></i>&nbsp;Name:</label>
                                             <input type="text" id="name" required style="border:1px solid black;border-radius:5px;" value="<?php //echo $_SESSION['name']; ?>" class="col-10">
                                             <label for="email" class="col-12" style="font-weight:bold;"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Email:</label>-->
-                                            <input type="hidden" name="email" required style="border:1px solid black;border-radius:5px;" value="<?php echo $_SESSION['email']; ?>" class="col-10">
+                                            <input type="hidden" name="email" required style="border:1px solid black;border-radius:5px;" value="<?php echo $email; ?>" class="col-10">
                                             <input type="hidden"  name="total_price" value="<?php echo $total; ?>" required style="border:1px solid black;border-radius:5px;"  class="col-10">
                                             <label for="phone" class="col-12" style="font-weight:bold;"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Phone:</label> 
                                             <input type="number" id="phone" name="phone_num" placeholder="Phone" required style="border:1px solid black;border-radius:5px;"  class="col-10"><br>

@@ -1,83 +1,55 @@
-<?php 
-session_start();
+<?php
+ require('../connect.php');
 
-  require_once("../connect.php");
-  // include("functions.php");
-  $emailErr=" ";
-  $nameErr=" ";
-function random_num($length)
-{
-	$text = "";
-	if($length < 5)
-	{
-		$length = 5;
-	}
+ if(isset($_POST['submit']))
+ {
+   if(!empty($_POST['user_name']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm_passw']))
+   {
+    $username = $_POST['user_name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $c_pass = $_POST['confirm_passw'];
+    $userid = md5($username);
 
-	$len = rand(4,$length);
-
-	for ($i=0; $i < $len; $i++) { 
-		# code...
-
-		$text .= rand(0,9);
-	}
-
-	return $text;
-}
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-  
-  
-
-if($_SERVER['REQUEST_METHOD'] == "POST")
-  {
-    //something was posted
-
-    
-    if(isset($_POST['user_name']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['confirm_passw'])){
-      $user_name = $_POST['user_name'];
-      $email=$_POST['email'];
-      $password = $_POST['password'];
-      $cpassword=$_POST['confirm_passw'];
-    }
-    $query= "SELECT * FROM `login`";
-	  if($qurn=mysqli_query($conn,$query))
+    if($password===$c_pass)
     {
-		  while($user = mysqli_fetch_assoc($qurn))
-         {
-			    if((($user['name'] != $user_name) &&($user['password'] != $password)) && (($user['name'] != $user_name) &&($user['email'] != $email)))
-			      {
-              
-              echo '<script>alert("username or email already exists .....!")</script>';
-              die();
-            }
+      $pass = md5($password);
+      $que1 = "SELECT `userid`,`name`,`email` FROM `login` WHERE `userid`='$userid' OR `name`='$username' OR `email`='$email'";
+      if($quer1 = mysqli_query($conn,$que1))
+      {
+        $rows = mysqli_num_rows($quer1);
+        // echo '<script>alert("'.$rows.'");</script>';
+        if($rows>=1)
+        {
+          echo '<script>alert("Username or email already exists..!!");</script>';
+        }
+        else
+        {
+          $que2 = "INSERT INTO `login` (userid,name,password,email,usertype) VALUES ('$userid','$username','$pass','$email','user')";
+          if($quer2 = mysqli_query($conn,$que2))
+          {
+            echo '<script>alert("Submitted");window.open("login.php","_self");</script>'; 
+            // header('Location:login.php');
+          }
+          else{
+            echo '<script>alert("Check your details once again..!");</script>';
           }
         }
-    if($password == $cpassword){
-        if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
-        {
-            //save to database
-            $user_id = random_num(20);
-            $query = "INSERT INTO `login` (userid,name,password,email,usertype) VALUES ('$user_id','$user_name','$password','$email','user')";
-            if($qurn = mysqli_query($conn, $query)){
-              echo "signed in successfully";
-              header("Location: login.php");
-              die;
-            }
-        }
-        else{
-            header("location:signup.php");
-        }
       }
-      else{    
-        echo '<script>alert("please enter valid password and details.....!")</script>';
     }
-}
-
+    else
+    {
+      echo '<script>alert("Passwords does not match");</script>';
+    }
+  }
+  else
+  {
+    echo "<script>alert('Please enter correct details');</script>";
+  }
+ }
 ?>
+
+
 
 <html lang="en">
   <head>
@@ -97,7 +69,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
 
           <!--<form  class="sign-in-form" method="post">
             <h2 class="title">Sign in</h2>
-
             <div class="input-field" >
               <i class="fas fa-user"></i>
               <input type="text" placeholder="Username" name="user_name" method="post"/>
@@ -116,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
              
             </div>
           </form>-->
-          <form  class="sign-up-form" method="POST" action=" ">
+          <form  class="sign-up-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <h2 class="title">Sign up</h2>
             
             <div class="input-field">
@@ -135,7 +106,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Confirm Password" name="confirm_passw" required/>
             </div>
-            <input type="submit" class="btn" value="Sign up" />
+            <input type="submit" class="btn" value="Sign up" name="submit"/>
           </form>
         </div>
       </div>
@@ -152,11 +123,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
               Sign up
             </button>-->
          <!--  <a href="signup.php" id="button" type="submit">Signup</a><br><br>
-
           </div>
          
         </div>-->
-        <div class="panel right-panel">
+        <!-- <div class="panel right-panel"> -->
           <div class="content">
             <h3>One of us ?</h3>
             <p>
@@ -165,16 +135,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             <a href="login.php" id="button" type="submit">Signin</a><br><br>
           </div>
           
-        </div>
+        <!-- </div> -->
       </div>
     </div>
-<?php
-  function pre_r($array){
-    echo "<pre>";
-    print_r($array);
-    echo "</pre>";
-  }
-?>
-    <!--<script src="app.js"></script>-->
-  </body>
+    </body>
 </html>

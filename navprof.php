@@ -1,7 +1,10 @@
 <?php
 $auth = isset($_SESSION['access_token']);
 $dbauth = isset($_SESSION['userid']);
-
+if(!$auth && !$dbauth)
+{
+  header('Location:index.php');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -106,7 +109,7 @@ form{
     }
     else if($dbauth){
       ?>
-      <a style="cursor: pointer;text-decoration: none;color:#ff4584;" href="googleLogin/dlogout.php">
+      <a style="cursor: pointer;text-decoration: none;color:#ff4584;" href="googleLogin/logout.php">
         <img class="rounded-circle" src="images/mug_2x.jpg" width="30px" height="30px">logout</a>
     <?php
     }

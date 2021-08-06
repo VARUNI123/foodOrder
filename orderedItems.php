@@ -24,9 +24,14 @@
     <div class="table-responsive">
       <?php
          $auth = isset($_SESSION['access_token']);
+         $dbauth = isset($_SESSION['userid']);
          if($auth!="")
          {
            $email = $_SESSION['email'];
+         }
+         else if($dbauth!='')
+         {
+           $email = $_SESSION['dbemail'];
          }
          $query = "SELECT * FROM `cartitems` WHERE `email`='$email' AND `order_id`='$order_id' AND `item_status`=1";
          if($qrun = mysqli_query($conn,$query))

@@ -208,22 +208,25 @@ if(isset($_POST['quantity']))
   <div class="hero">
     <div class="hero-text">
      <?php
-       if(!$auth)
+       if($auth)
+       // if(isset($_SESSION['access_token']))
+        {
+        ?>
+       <h1 class="text-dark text-center"><?php echo $_SESSION['name']; ?>&nbsp;Enjoy food recipes by ordering from here...!</h1>
+       <?php
+        }
+       else if($dbauth)
+       {
+         ?>
+       <h1 class="text-dark text-center"><?php echo $_SESSION['user_name']; ?>&nbsp;Enjoy food recipes by ordering from here...!</h1>
+         <?php
+       }
+       else
        {
        ?>
        <h1 class="text-dark text-center">Enjoy food recipes by ordering from here...!</h1>
-      <?php
+       <?php
        }
-      else
-      {
-      ?>
-      <h1 class="text-dark text-center">
-      <?php 
-        echo $_SESSION['name']; 
-      ?>
-      &nbsp;Enjoy food recipes by ordering from here...!</h1>
-      <?php
-      }
       ?>
     </div>
   </div>

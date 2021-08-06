@@ -363,14 +363,23 @@ nav .search-icon{
         }
         else if($dbauth){
           ?>
-          <div>
-          <li><a style="text-decoration:none;color:white;" href="http://localhost/fprjct/profile.php">&nbsp;<?php echo $_SESSION['user_name'];?></a></li>
+           <li>
+              <div class="btn drpbtn">&nbsp;<h6 style="color:white;"><?php echo $_SESSION['user_name'];?></h6>
+                <div class="dropdown-content">
+                  <a href="profile.php">Profile</a>
+                  <a href="order.php">Your order history</a>
+                  <a href="#">Track order</a>
+                </div>
+              </div>
+            </li>
+          <!-- <div>
+          <li><a style="text-decoration:none;color:white;" class="drpbtn" href="http://localhost/fprjct/profile.php">&nbsp;<?php //echo $_SESSION['user_name'];?></a></li>
           <div class="dropdown-content">
             <a href="profile.php">Profile</a>
             <a href="order.php">Your order history</a>
             <a href="#">Track order</a>
           </div>
-          </div>
+          </div> -->
           <?php
         }
       ?>

@@ -24,9 +24,14 @@
     <div class="table-responsive">
       <?php
          $auth = isset($_SESSION['access_token']);
+         $dbauth = isset($_SESSION['userid']);
          if($auth!="")
          {
            $email = $_SESSION['email'];
+         }
+         else if($dbauth!="")
+         {
+           $email = $_SESSION['dbemail'];
          }
          $query = "SELECT * FROM `billing` WHERE `email`='$email' ORDER BY `added_on` DESC";
          if($qrun = mysqli_query($conn,$query))

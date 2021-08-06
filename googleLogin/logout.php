@@ -2,6 +2,7 @@
  require_once('config.php');
  unset($_SESSION['access_token']);
  $gClient->revokeToken();
+ unset($_SESSION['userid']);
  session_destroy();
  header('Location:http://localhost/fprjct/index.php');
  exit();

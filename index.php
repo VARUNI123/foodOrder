@@ -11,6 +11,16 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
  //require_once('googleLogin/config.php');
  /*if(isset($_SESSION['access_token']))*/
    $auth = isset($_SESSION['access_token']);
+   $dbauth = isset($_SESSION['userid']);
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     echo "<script>alert('$usertype');</script>";
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
 ?>
 <!doctype html>
 <html>
@@ -43,6 +53,12 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
       <h1 class="text-light text-center"><?php echo $_SESSION['name']; ?>&nbsp;Enjoy food recipes by ordering from here...!</h1>
       <?php
        }
+      else if($dbauth)
+      {
+        ?>
+      <h1 class="text-light text-center"><?php echo $_SESSION['user_name']; ?>&nbsp;Enjoy food recipes by ordering from here...!</h1>
+        <?php
+      }
       else
       {
       ?>
@@ -178,3 +194,6 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
   </script>
  </body>
 </html>
+<?php
+
+?>

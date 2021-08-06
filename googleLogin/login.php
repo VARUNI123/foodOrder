@@ -2,7 +2,7 @@
  require_once('config.php');
  require_once('../connect.php');
  $loginUrl = $gClient->createAuthUrl();
- if(isset($_SESSION['access_token']))
+ if(isset($_SESSION['access_token']) || isset($_SESSION['userid']))
  {
    header('Location:http://localhost/fprjct/index.php');
  }

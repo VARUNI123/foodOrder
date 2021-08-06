@@ -2,7 +2,7 @@
  require('googleLogin/config.php');
    $auth = isset($_SESSION['access_token']);
    $dbauth= isset($_SESSION['userid']);
- if(isset($_SESSION['access_token']) && isset($_SESSION['hex']) && isset($_GET['thanks']))
+ if((isset($_SESSION['access_token']) || isset($_SESSION['userid'])) && isset($_SESSION['hex']) && isset($_GET['thanks']))
  {
    $hex = $_SESSION['hex'];
    $than = $_GET['thanks'];

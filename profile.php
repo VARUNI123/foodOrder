@@ -1,7 +1,7 @@
 <?php
 require_once('connect.php');
 require_once('googleLogin/config.php');
-if(!isset($_SESSION['access_token']))
+if(!isset($_SESSION['access_token']) && !isset($_SESSION['userid']))
 {
   header('Location:http://localhost/fprjct/index.php');
 }
@@ -35,7 +35,18 @@ else
 <div class="left">
       <img src="images/mug_2x.jpg" class="imgcls">
       <div class="det">
-                <div color="#FFFFFF" class="name" style=" font-weight: 600;"><h4><?php echo $_SESSION['name']; ?></h4></div>
+                <div color="#FFFFFF" class="name" style=" font-weight: 600;"><h4>
+                   <?php 
+                   if($auth)
+                   {
+                     echo $_SESSION['name'];
+                   }
+                   else
+                   {
+                      echo $_SESSION['user_name'];
+                   }
+                  ?>
+                </h4></div>
                 <div class="loc">
                 <i class="symbol" color="#FFFFFF" size="14">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" width="14" height="14" viewBox="0 0 20 20" aria-labelledby="icon-svg-title- icon-svg-desc-" role="img" class="symbol1">
