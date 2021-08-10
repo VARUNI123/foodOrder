@@ -1,6 +1,17 @@
 <?php
 require_once('connect.php');
 require_once('googleLogin/config.php');
+
+   $dbauth = isset($_SESSION['userid']);
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
+
 if(!isset($_SESSION['access_token']) && !isset($_SESSION['userid']))
 {
   header('Location:http://localhost/fprjct/index.php');

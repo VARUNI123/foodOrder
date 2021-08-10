@@ -9,6 +9,16 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
 
 $auth = isset($_SESSION['access_token']);
 $dbauth= isset($_SESSION['userid']);
+
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
+
 if(isset($_GET['type']))
 {
   $type = $_GET['type'];
@@ -84,43 +94,75 @@ elseif($type=="Offers"){
     <div class="row icard">
 
 <?php
- $query = "SELECT * FROM `categories` WHERE `type` = '$type' ";
- if($qrun = mysqli_query($conn,$query))
- {
-   while($row = mysqli_fetch_assoc($qrun))
-   {
-     $iType = $row['title'];
-   ?>
-    <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
-      <a class="stretched-link text-decoration-none" href="http://localhost/fprjct/<?php echo $link.$row['title']; ?>"></a>
-        <img src="<?php echo $row['image']; ?>" alt="trending" height="200px" >
-        <div class="card-body">
-          <div class="card-content">
-            <div class="row">
-              <div class="card-title col-7 col-sm-8 col-md-8"><h5><?php echo $row['title']; ?></h5></div>
-              <div class="card-text col-3 col-sm-3 col-md-4">
-               <!-- <p class="badge badge-danger"><?php// echo $row['count']; ?></p> -->
-               <?php
-                  if($type == "Categories")
-                  {
-                      $query1 = "SELECT `item` FROM `fooditems` WHERE `itemType`='$iType' GROUP BY `item`";
-                      if($qrn = mysqli_query($conn,$query1))
-                      {
-                        $count = mysqli_num_rows($qrn);
-                          ?>
-                  <p class="badge badge-danger"><?php echo $count; ?></p>
-                  <?php
-                      }
-                  }
-               ?>
+//Sample 
+if($type=="Restaurants")
+{
+  $query = "SELECT * FROM `categories` WHERE `type` = 'Restaurants' AND `res_status`=1 ";
+  if($qrun = mysqli_query($conn,$query))
+  {
+    while($row = mysqli_fetch_assoc($qrun))
+    {
+      $iType = $row['title'];
+    ?>
+      <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
+        <a class="stretched-link text-decoration-none" href="http://localhost/fprjct/<?php echo $link.$row['title']; ?>"></a>
+          <img src="<?php echo $row['image']; ?>" alt="trending" height="200px" >
+          <div class="card-body">
+            <div class="card-content">
+              <div class="row">
+                <div class="card-title col-7 col-sm-8 col-md-8"><h5><?php echo $row['title']; ?></h5></div>
+                <div class="card-text col-3 col-sm-3 col-md-4">
+                <!-- <p class="badge badge-danger"><?php// echo $row['count']; ?></p> -->
+                </div>
               </div>
             </div>
           </div>
-        </div>
-    </div>
-    <?php
-   }
- }
+      </div>
+      <?php
+    }
+  }
+
+}
+else
+{
+  $query = "SELECT * FROM `categories` WHERE `type` = '$type' ";
+  if($qrun = mysqli_query($conn,$query))
+  {
+    while($row = mysqli_fetch_assoc($qrun))
+    {
+      $iType = $row['title'];
+    ?>
+      <div class="card col-sm-5 col-md-3 icards" data-aos="zoom-in-up">
+        <a class="stretched-link text-decoration-none" href="http://localhost/fprjct/<?php echo $link.$row['title']; ?>"></a>
+          <img src="<?php echo $row['image']; ?>" alt="trending" height="200px" >
+          <div class="card-body">
+            <div class="card-content">
+              <div class="row">
+                <div class="card-title col-7 col-sm-8 col-md-8"><h5><?php echo $row['title']; ?></h5></div>
+                <div class="card-text col-3 col-sm-3 col-md-4">
+                <!-- <p class="badge badge-danger"><?php// echo $row['count']; ?></p> -->
+                <?php
+                    if($type == "Categories")
+                    {
+                        $query1 = "SELECT `item` FROM `fooditems` WHERE `itemType`='$iType' GROUP BY `item`";
+                        if($qrn = mysqli_query($conn,$query1))
+                        {
+                          $count = mysqli_num_rows($qrn);
+                            ?>
+                    <p class="badge badge-danger"><?php echo $count; ?></p>
+                    <?php
+                        }
+                    }
+                ?>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <?php
+    }
+  }
+}
 ?>
   </div>
 </div>

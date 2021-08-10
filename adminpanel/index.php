@@ -16,275 +16,179 @@
       {
           header('Location:http://localhost/fprjct/index.php');
       }
+      require_once('resAdd.php');
 ?>
+
 <!DOCTYPE html>
-<html lang="en"> 
+<html>
 <head>
-    
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        
-            Admin Panel
-        
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    
-    <script type="text/javascript">
-        var host = "bootadmin.org";
-        if ((host == window.location.host) && (window.location.protocol != "https:"))
-            window.location.protocol = "https";
-    </script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<title>Admin Panel</title>
 
-   
-    <!-- Le CSS
-    ================================================== -->
-    <link rel="stylesheet" href="https://bootadmin.org/style/vendor/library.min.css">
-    <link rel="stylesheet" href="https://bootadmin.org/style/vendor/jqueryui-flat/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    
-    
-    <link rel="stylesheet" href="https://bootadmin.org/style/core/style.min.css">
+<?php 
+  require('../links.php');
+  require('../connect.php');
+?>
+<style>
+    html
+    {
+        scroll-behavior:smooth;   
+    }
+    body {
+      font-family: "Lato", sans-serif;
+    }
 
-   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background:#171c24;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
 
-    
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
 
-	<!-- Le Favicons
-	================================================== -->
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/images/favicon/favicon.ico">
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.topbar
+{
+  height:70px;
+  width:100%;
+  background:#171c24;
+}
+.drpdown-content
+{
+  display:none;
+  right:5px;
+  margin-top:5px;
+  position:absolute;
+  background-color: #f1f1f1;
+  width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index:1;
+}
+.drpdown-content a
+{
+  display:block;
+  text-decoration:none;
+  color:black;
+  padding:12px 16px;
+}
+.drpdown-content a:hover
+{
+  color:orange;
+}
+.drpbtn:hover .drpdown-content {display:block;}
+
+.icards:hover
+{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#snackbar,#snackbarR {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 999999;
+  left: 50%;
+  transform:translateX(-18%); 
+  bottom: 30px;
+  }
+
+
+  #snackbar.show,#snackbarR.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+
+  @-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+  }
+
+  @keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+  }
+
+  @-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+  }
+
+  @keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+  }
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
 </head>
+<body>
 
-<body id="landing" class="sidebar-open">
-<div class="loading">
-    <div class="loading-center"><img src="https://bootadmin.org/images/loading/map.gif" alt="Loading" /></div>
-</div>
-<div class="page-container animsition">
-    <div id="dashboardPage">
-        
-
-<!-- Main Menu -->
 <div class="topbar">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-5 hidden-xs">
-                <div class="logo">
-                    <a href="/">
-                        <span class="logo-emblem"><img src="https://bootadmin.org/images/boot.png" alt="BA" /></span>
-                        <span class="logo-full">RESTAURANT</span>
-                    </a>
-                </div>
-                <a href="#" class="menu-toggle wave-effect">
-                    <i class="feather icon-menu"></i>
-                </a>
-            </div>
-            <div class="col-md-7 text-right">
-                <ul>
-                    <!-- Profile Menu -->
-                    <li class="btn-group user-account">
-                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="user-content">
-                                <div class="user-name">Admin</div>
-                                <div class="user-plan">one of the admin</div>
-                            </div>
-                            <div class="avatar">
-                                <img src="profile.png" alt="profile" />
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#" class="animsition-link dropdown-item wave-effect"><i class="feather icon-user"></i> Profile</a></li>
-                            <li><a href="#" class="animsition-link dropdown-item wave-effect"><i class="feather icon-dollar-sign"></i> Billing</a></li>
-                            <li><a href="#" class="animsition-link dropdown-item wave-effect"><i class="feather icon-settings"></i> Settings</a></li>
-                            <li><a href="http://localhost/fprjct/googleLogin/logout.php" class="animsition-link dropdown-item wave-effect"><i class="feather icon-log-in"></i> Logout</a></li>
-                        </ul>
-                    </li>
-                    <!-- Offcanvas Menu -->
-                    <li>
-                        <a href="#" class="btn wave-effect offcanvas-toggle"><i class="feather icon-settings"></i></a>
-                    </li>
-                    <!-- Notification Menu -->
-                    <li class="btn-group notification">
-                        <a href="javascript:;" class="btn  wave-effect" >
-                            <i class="feather icon-bell"><span class="notification-count">27</span></i>
-                        </a>
-                    </li>
-                    <li class="mobile-menu-toggle">
-                        <a href="#" class="menu-toggle wave-effect">
-                            <i class="feather icon-menu"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <span style="font-size:30px;cursor:pointer;color:white;float:left;margin:15px;"  onclick="openNav()">&#9776;</span>
+    <span style="font-size:110%;cursor:pointer;color:white;float:right;margin:15px;" class="btn drpbtn"><?php echo $_SESSION['user_name']; ?>
+      <div class="drpdown-content">
+        <a href="profile.php">Profile</a>
+        <a href="../googleLogin/logout.php">Logout</a>
+      </div>
+    </span>
 </div>
 
-<aside class="offcanvas-menu">
-    <div class="offcanvas-button">
-        <a href="#" class="btn wave-effect offcanvas-toggle font-20"><span aria-hidden="true">&times;</span></a>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <button class="btn btn-secondary ml-4" data-toggle="collapse" data-target="#navdashBoard">Dashboard</button>
+    <div id="navdashBoard" class="collapse" style="color:white;">
+      <ul style="">
+        <li style="list-style-type:none;">
+          <a href="#restaurant" style="font-size:100%;color:white;padding-left:3px;">Restaurants</a>
+        </li>
+      </ul>
     </div>
-    
-</aside>
-
-        
-
-<!-- Main Menu -->
-<div class="sidebar">
-    <div class="logo">
-        <a href="/">
-            <span class="logo-emblem"><img src="https://bootadmin.org/images/boot.png" alt="BA" /></span>
-            <span class="logo-full">restaurant</span>
-        </a>
-    </div>
-    <ul id="sidebarCookie">
-        <li class="spacer"></li>
-        <li class="profile">
-            <span class="profile-image">
-                <img src="profile.png" alt="profile" />
-            </span>
-            <span class="profile-name">
-                ADMIN
-            </span>
-            <span class="profile-info">
-                one of the admin
-            </span>
-        </li>
-        <li class="spacer"></li>
-        <li class="title">
-            <i class="feather icon-more-horizontal"></i>
-            <span class="menu-title">Main</span>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link wave-effect collapsed wave-effect" data-parent="#sidebarCookie" data-toggle="collapse" href="#navDashboard" aria-expanded="false" aria-controls="page-dashboards">
-                <i class="feather icon-grid"></i>
-                <span class="menu-title">Dashboard</span>
-                <i class="feather icon-chevron-down down-arrow"></i>
-            </a>
-            <div class="collapse" id="navDashboard">
-                <ul class="flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-layout"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        
-        <li class="nav-item">
-            <a class="nav-link wave-effect collapsed" data-parent="#sidebarCookie" data-toggle="collapse" href="#navMailbox" aria-expanded="false" aria-controls="page-mailbox">
-                <i class="feather icon-mail"></i>
-                <span class="menu-title">Mailbox</span>
-                <i class="feather icon-chevron-down down-arrow"></i>
-            </a>
-            <div class="collapse" id="navMailbox">
-                <ul class="flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-inbox"></i>
-                            <span class="menu-title">Inbox</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-mail"></i>
-                            <span class="menu-title">Email</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-send"></i>
-                            <span class="menu-title">Compose</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link wave-effect collapsed" data-parent="#sidebarCookie" data-toggle="collapse" href="#navProfilebox" aria-expanded="false" aria-controls="page-profilebox">
-                <i class="feather icon-users"></i>
-                <span class="menu-title">Account</span>
-                <i class="feather icon-chevron-down down-arrow"></i>
-            </a>
-            <div class="collapse" id="navProfilebox">
-                <ul class="flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-user"></i>
-                            <span class="menu-title">Profile</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-dollar-sign"></i>
-                            <span class="menu-title">Billing</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link wave-effect" href="#">
-                            <i class="feather icon-settings"></i>
-                            <span class="menu-title">Settings</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link wave-effect nav-single">
-                <i class="feather icon-zap"></i>
-                <span class="menu-title">Credits</span>
-            </a>
-        </li>
-        <li class="spacer"></li>
-        <li class="button-container">
-            <a href="#" class="btn btn-primary display-block">LinkedIn</a>
-        </li>
-    </ul>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
 </div>
 
-        <main>
-            <div class="page-breadcrumb">
-    <div class="row">
-        <div class="col-6">
-            <h4 class="page-title">Dashboard</h4>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                </ol>
-            </nav>
-        </div>
-        <?php
-        $uquery="SELECT `email` FROM `login` ORDER BY `userid`";
-        if($uqurn = mysqli_query($conn,$uquery)){
-            $ucount = mysqli_num_rows($uqurn);
-        }
-        ?>
-        <div class="col-6">
-            <div class="text-right">
-                <small>Users</small>
-                <h5 class="text-info"><?php echo $ucount;?></h5>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid mt-2">
+<div class="row">
         <!-- column -->
         <div class="col-sm-12 col-lg-4">
-            <div class="card card-hover">
+            <div class="card  bg-light icards m-1">
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-4">
@@ -300,7 +204,7 @@
         </div>
         <!-- column -->
         <div class="col-sm-12 col-lg-4">
-            <div class="card card-hover bg-red">
+            <div class="card bg-danger icards m-1">
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-4">
@@ -316,12 +220,18 @@
         </div>
         <!-- column -->
         <div class="col-sm-12 col-lg-4">
-            <div class="card card-hover bg-green">
+            <div class="card bg-success icards m-1">
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="mr-4">
                             <small>Active Users</small>
-                            <h4 class="mb-0">500</h4>
+                            <?php
+                                $uquery="SELECT `email` FROM `login` ORDER BY `userid`";
+                                if($uqurn = mysqli_query($conn,$uquery)){
+                                    $ucount = mysqli_num_rows($uqurn);
+                                }
+                            ?>
+                            <h4 class="mb-0"><?php echo $ucount; ?></h4>
                         </div>
                         <div class="chart ml-auto">
                         <span class="fa fa-star "></span>
@@ -331,8 +241,10 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
+<div class="container-md mt-3">
+  <div class="row">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -430,70 +342,71 @@
         </div>
     </div>
 
-    <div class="row">
-        <!-- column -->
-        <div class="col-lg-6">
-            <div class="card card-hover">
+    <div class="row mt-2">
+              <!-- column -->
+              <div class="col-lg-6">
+            <div class="card ">
                 <div class="card-body">
                     <h4 class="card-title">Current Details</h4>
-                    <table class="table table-striped table-hover table-borderless table-vcenter font-size-sm">
-                        <thead>
-                            <tr class="text-uppercase">
-                                <th class="font-w700">Customer MailID</th>
-                                <th class="d-none d-sm-table-cell font-w700">Date</th>
-                                <th class="font-w700">Order Status</th>
-                                <th class="d-none d-sm-table-cell font-w700 text-right" style="width: 120px;">Price</th>
-                                <th class="font-w700 text-center" style="width: 60px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                           foreach($orderid_list as $value){
-                            $query = "SELECT * FROM `billing` WHERE `order_id`='$value' ORDER BY `added_on` DESC";
-                            if($qrun = mysqli_query($conn,$query))
-                            {
-                              $num = mysqli_num_rows($qrun);
-                              if($num<1)
-                              {
-                               echo '<div style="display:flex;align-items:center;justify-content:center;height:100%;"><a href="#"><button class="btn btn-primary">Nothing ordered yet...</button></a></div>'; 
-                               }
-                              else
-                              {
-                                     while($row = mysqli_fetch_assoc($qrun))
-                                     {
-                    ?>
-                            <tr>
-                                <td>
-                                    <span class="font-w600"><?php echo $row['email']; ?></span>
-                                </td>
-                                <td class="d-none d-sm-table-cell">
-                                    <span class="font-size-sm text-muted"><?php echo $row['added_on']; ?></span>
-                                </td>
-                                <td>
-                                    <span class="font-w600 text-warning"><?php echo $row['order_status']; ?></span>
-                                </td>
-                                <td class="d-none d-sm-table-cell text-right">
-                                    Rs.<?php echo $row['total_price'];?>
-                                </td>
-                                <td class="text-center">
-                                    <a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="" class="js-tooltip-enabled" data-original-title="Manage">
-                                        <i class="fa fa-fw fa-pencil-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered font-size-sm">
+                            <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Customer MailID</th>
+                                    <th class="d-sm-table-cell font-w700">Date</th>
+                                    <th class="font-w700">Order Status</th>
+                                    <th class="d-sm-table-cell font-w700 text-right" style="width: 120px;">Price</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <?php
-                  }
-           }
-        }
-    }
-                ?>
-                              </tbody>
-                    </table>
+                              foreach($orderid_list as $value){
+                                $query = "SELECT * FROM `billing` WHERE `order_id`='$value' ORDER BY `added_on` DESC";
+                                if($qrun = mysqli_query($conn,$query))
+                                {
+                                  $num = mysqli_num_rows($qrun);
+                                  if($num<1)
+                                  {
+                                  echo '<div style="display:flex;align-items:center;justify-content:center;height:100%;"><a href="#"><button class="btn btn-primary">Nothing ordered yet...</button></a></div>'; 
+                                  }
+                                  else
+                                  {
+                                        while($row = mysqli_fetch_assoc($qrun))
+                                        {
+                        ?>
+                                <tr>
+                                    <td>
+                                        <span class="font-w600"><?php echo $row['email']; ?></span>
+                                    </td>
+                                    <td class="d-sm-table-cell">
+                                        <span class="font-size-sm text-muted"><?php echo $row['added_on']; ?></span>
+                                    </td>
+                                    <td>
+                                        <span class="font-w600 text-warning"><?php echo $row['order_status']; ?></span>
+                                    </td>
+                                    <td class="d-sm-table-cell text-right">
+                                        Rs.<?php echo $row['total_price'];?>
+                                    </td>
+                                    <td class="text-center">
+                                      <a href=""style="color:black;"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                                <?php
+                                  }
+                          }
+                        }
+                    }
+                    ?>
+                                  </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- column -->
-        <div class="col-lg-6">
+
+        <!-- Column -->
+         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">ANALYTICS</h4>
@@ -511,7 +424,7 @@
                          foreach($restArr as $restaurant)
                          {
                             // $qr = "SELECT * FROM `cartitems` WHERE `restaurant`='$restaurant'";
-                            $qr = "SELECT `order_id` FROM `cartitems` WHERE `restaurant`='$restaurant' GROUP BY `order_id`";
+                            $qr = "SELECT `order_id` FROM `cartitems` WHERE `restaurant`='$restaurant' AND `item_status`=1 GROUP BY `order_id`";
                             if($qrun = mysqli_query($conn,$qr))
                             {
                                 $count[] = mysqli_num_rows($qrun);
@@ -535,7 +448,7 @@
                                 data: [              
                                 {
                                     // Change type to "doughnut", "line", "splineArea", etc.
-                                    type: "pie",
+                                    type: "column",
                                     dataPoints:<?php echo json_encode($datapoints); ?>
                                 }
                                 ]
@@ -543,41 +456,133 @@
                             chart.render();
                         }
                     </script>
-                    <div id="tree">
+                    <div id="tree" style="height:800px;"></div>
+                </div>
+             </div>
+         </div>
+     </div>
+
+     <div class="row mt-2" id="restaurant">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <h3 class="m-4" style="text-decoration:underline;">Restaurants Details</h3>
+                        <div id="sample" style="display:none;"></div>
+                        <div class="ml-auto">
+
+                            <!--Billing Modal-->
+                                <div class="modal fade" id="mymodal">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                        
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                            <h3 class="modal-title ml-3" style="font-weight:bold;">Add Restaurant Details</h3>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            
+                                            <!-- Modal body -->
+                                            <div class="modal-body" style="">
+                                                <form action="index.php" method="POST" enctype="multipart/form-data">
+                                                    <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-glass" aria-hidden="true"></i>&nbsp;Restaurant Name:</label> 
+                                                    <input type="text" id="name" name="res_name" placeholder="Restaurant Name" required  style="border:1px solid black;border-radius:5px;"  class="col-10"><br>
+                                                    <div class="row mt-2">
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <label for="phone" class="" style="font-weight:bold;"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;Phone:</label>
+                                                            <input type="number" id="phone" name="phone_num" placeholder="Phone" required style="border:1px solid black;border-radius:5px;"  class=""><br>
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-5">
+                                                            <label style="font-weight:bold;"><i class="fa fa-file-image-o" aria-hidden="true"></i>&nbsp;<span style="font-size:80%;">Image of Restaurant:</span></label>
+                                                            <input type="file"  name="image" id="image" required>
+                                                        </div>
+                                                    </div>
+                                                    <label for="address" class="col-12" style="font-weight:bold;"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;Address</label>
+                                                    <textarea name="address" id="address"  style="border:1px solid black;border-radius:5px;width:85%;height:150px;" placeholder="Address" required></textarea>
+                                                      <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                                        <!-- <button onclick="add(document.getElementById('name').value,document.getElementById('phone').value,document.getElementById('image').value,document.getElementById('address').value)" class="btn btn-success">Add+</button> -->
+                                                        <button class="btn btn-success" type="submit" name="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            
+                                            <!-- Modal footer -->
+                                            <!-- <div class="modal-footer"> -->
+                                                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                                <!-- <button onclick="add(document.getElementById('name').value,document.getElementById('phone').value,document.getElementById('image').value,document.getElementById('address').value)" class="btn btn-success">Add+</button> -->
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            <!--  -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mymodal">Upload a Restaurant</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- column -->
-        
-
-        </main>
-    </div>
-
+                <div class="container-md">
+                    <div class="table-responsive">
+                        <?php include('restaurants.php'); ?>
+                    </div>
+                </div>
+              </div>
+          </div>
+       </div>
 </div>
 
+<div id="snackbar" style="background-color:green;"></div>
 
-
-<!-- Le Javascript -->
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://bootadmin.org/scripts/vendor/bootstrap.min.js"></script>
-<script src="https://bootadmin.org/scripts/vendor/library.min.js"></script>
-
-
-
-<script src="https://bootadmin.org/scripts/core/main.js"></script>
 
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-104952515-1', 'auto');
-    ga('send', 'pageview');
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+$(document).ready(function(){
+      setTimeout(() => {
+        $(".load").fadeOut("slow");
+      }, 1000);
+
+      $(document).on('click','.action',function(){
+        var restaurant = $(this).data('restaurant');
+        var res_status = $(this).data('res_status');
+        var action = "change_status";
+        // alert(res_status+","+restaurant);
+        $("#sample").html('');
+        // if(confirm("Are you sure want to change status?"))
+        // {
+            $.ajax({
+                url:"resAdd.php",
+                method:"POST",
+                data:{restaurant:restaurant,res_status:res_status,action:action},
+                success:function(data)
+                {
+                    if(data!="")
+                    {
+                        // load_user_data();
+                        $("#sample").html(data);
+                    }
+                    location.reload();
+                }
+            });
+
+        // }
+        // else
+        // {
+        //     return false;
+        // }
+      });
+    });
+
 </script>
+   
 </body>
-</html>
+</html> 
 <?php
   }
   else

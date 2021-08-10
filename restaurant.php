@@ -8,9 +8,23 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
 
         $auth = isset($_SESSION['access_token']);
         $dbauth= isset($_SESSION['userid']);
+
+        if($dbauth)
+        {
+          $usertype=$_SESSION['usertype'];
+          if($usertype==="admin")
+          {
+            header('Location:adminpanel/index.php');
+          }
+        }
+
 if(isset($_GET['name']))
 {
   $name = $_GET['name'];
+}
+else
+{
+  echo '<script>alert("Oops! You did not choose any Restaurant");window.open("categories.php?type=Restaurants","_self");</script>';
 }
 ?>
 <html>

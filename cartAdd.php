@@ -3,6 +3,16 @@ require_once('connect.php');
 require_once('googleLogin/config.php');
 $auth = isset($_SESSION['access_token']);
 $dbauth= isset($_SESSION['userid']);
+
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
+
 if($auth!="")
 {
   $email = $_SESSION['email'];

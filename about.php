@@ -1,6 +1,16 @@
 <?php
 require_once('connect.php');
 require_once('googleLogin/config.php');
+
+  $dbauth = isset($_SESSION['userid']);
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -6,6 +6,22 @@
   // echo $date;
   $md = md5($date);
   // echo '<br>'.$md;
+  $auth = isset($_SESSION['access_token']);
+  $dbauth = isset($_SESSION['userid']);
+   
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
+
+  if(!$auth && !$dbauth)
+  {
+    header('Location:index.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +39,6 @@
   <div class="container-md">
     <div class="table-responsive">
       <?php
-         $auth = isset($_SESSION['access_token']);
-         $dbauth = isset($_SESSION['userid']);
          if($auth!="")
          {
            $email = $_SESSION['email'];

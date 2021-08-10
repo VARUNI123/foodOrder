@@ -2,9 +2,29 @@
   require_once('connect.php');
   require_once('googleLogin/config.php');
   date_default_timezone_set('Asia/Kolkata');
+ 
+  if(!isset($_SESSION['access_token']) && !isset($_SESSION['userid']))
+  {
+    header('Location:index.php');
+  }
+
+  $dbauth = isset($_SESSION['userid']);
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
+
   if(isset($_GET['order_id']))
   {
     $order_id = $_GET['order_id'];
+  }
+  else
+  {
+    echo '<script>alert("Oops! We did not find any order id..! Try to keep order again!");window.open("order.php","_self");</script>';
   }
 ?>
 

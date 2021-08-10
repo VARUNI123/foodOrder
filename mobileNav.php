@@ -1,8 +1,13 @@
 <?php
 // session_start();
-// require_once('googleLogin/config.php');
+require_once('googleLogin/config.php');
  /*if(isset($_SESSION['access_token']))*/
    $auth = isset($_SESSION['access_token']);
+   $dbauth = isset($_SESSION['userid']);
+   if($dbauth)
+   {
+    $usertype=$_SESSION['usertype'];
+  }
 ?>
 <html>
   <head>
@@ -11,16 +16,7 @@
   </style>
   </head>
   <body>
-   <nav class="navbar navbar-inverse fixed-top bg-light">
-     <a class="navbar-brand" href=""><img src="images/logo.png" height="50px" width="50px"></a>
-     <div class="search">
-       <form>
-         <div>
-           <input type="text" class="border border-secondary" placeholder="Search">&nbsp;<i class="fa fa-microphone"></i>
-         </div>
-       </form>
-     </div>
-   </nav>
+   <?php require('navbarM.php'); ?>
 
   <div class="sidebar">
      <div id="openS" class="open" onclick="openSide();">
@@ -28,7 +24,7 @@
      </div>
      <div class=""><a href="http://localhost/fprjct/hpage.php"><i class="fa fa-home"></i>&nbsp;Home</a></div>
       <?php
-      if($auth)
+      if($auth || $dbauth)
       //if(isset($_SESSION['access_token']))
       {
       ?>

@@ -10,6 +10,15 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
 $auth = isset($_SESSION['access_token']);
 $dbauth= isset($_SESSION['userid']);
 
+   if($dbauth)
+   {
+     $usertype=$_SESSION['usertype'];
+     if($usertype==="admin")
+     {
+       header('Location:adminpanel/index.php');
+     }
+   }
+
  require('connect.php');
 if(isset($_GET['category']))
 {
