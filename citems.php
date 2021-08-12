@@ -291,14 +291,24 @@ if(isset($_POST['quantity']))
                                 <select class="form-control bg-light" data-role="select-dropdown" id="res<?php echo $row['item']; ?>">
                                   <option value="" selected>Choose a Restaurant</option>
                                   <?php 
-                                    $queryRes = "SELECT `restaurant` FROM `fooditems` WHERE `item`='".$row['item']."' AND `itemType`='$cat'";
+                                    $queryRes = "SELECT `restaurant` FROM `fooditems` WHERE `item`='".$row['item']."' AND `itemType`='$cat' AND `item_status`=1";
                                     if($qrunRes = mysqli_query($conn,$queryRes))
                                     {
-                                      while($resRow = mysqli_fetch_assoc($qrunRes))
+                                      $num = mysqli_num_rows($qrunRes);
+                                      if($num<1)
                                       {
                                         ?>
-                                        <option value="<?php echo $resRow['restaurant']; ?>"><?php echo $resRow['restaurant']; ?></option>
+                                        <option value="">Present this item is not available in any Restaurant</option>
                                         <?php
+                                      }
+                                      else
+                                      {
+                                        while($resRow = mysqli_fetch_assoc($qrunRes))
+                                        {
+                                          ?>
+                                          <option value="<?php echo $resRow['restaurant']; ?>"><?php echo $resRow['restaurant']; ?></option>
+                                          <?php
+                                        }
                                       }
                                     }
                                   ?>

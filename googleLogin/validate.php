@@ -55,6 +55,11 @@ if ($_SERVER["REQUEST_METHOD"]== "POST") {
 							header("Location: ../adminpanel/index.php");
 							die;
 						}
+						else
+						{
+							header('Location:../adminpanel/resAdmin.php');
+							die;
+						}
 										
 					}
 			 }

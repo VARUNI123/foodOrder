@@ -107,7 +107,8 @@ if(isset($_POST['action']))
     }
     $rquery1 = "UPDATE `restaurants` SET `res_status`=$res_status WHERE `name`='$restaurant' ";
     $rquery2 = "UPDATE `categories` SET `res_status`=$res_status WHERE `title`='$restaurant' AND `type`='Restaurants' ";
-    if(mysqli_query($conn,$rquery1) && mysqli_query($conn,$rquery2))
+    $rquery3 = "UPDATE `fooditems` SET `item_status`=$res_status WHERE `restaurant`='$restaurant'";
+    if(mysqli_query($conn,$rquery1) && mysqli_query($conn,$rquery2) && mysqli_query($conn,$rquery3))
       {
         echo '<div class="alert alert-success">User status has been set to '.$status.'</div>';
       }

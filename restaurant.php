@@ -318,7 +318,7 @@ else
         <section class="center slider">
         <?php
             //  $query1 = "SELECT * FROM `catdetails` ORDER BY RAND() LIMIT 6";
-             $query1 = "SELECT * FROM `fooditems` WHERE `restaurant`='$name' LIMIT 6";
+             $query1 = "SELECT * FROM `fooditems` WHERE `restaurant`='$name' AND `item_status`=1 LIMIT 6";
              if($qrun1 = mysqli_query($conn,$query1))
              {
                while($row1 = mysqli_fetch_assoc($qrun1))
@@ -359,7 +359,7 @@ else
           echo '<button class="accordion" style="font-weight:bold;">'.$value.'</button>';
           echo '<div class="panel">';
           echo '<div id="divCard" class="row icard">';
-          $query3 = "SELECT * FROM `fooditems` WHERE `itemType`='$value' AND `restaurant`='$name'";
+          $query3 = "SELECT * FROM `fooditems` WHERE `itemType`='$value' AND `restaurant`='$name' AND `item_status`=1";
           if($qrun3 = mysqli_query($conn,$query3))
           {
             $num = mysqli_num_rows($qrun3);
@@ -455,7 +455,7 @@ else
         foreach($catd as $x => $val)
         {
           echo '<h4 class="col-12 text-center"><span style="border-bottom:1px solid black; font-size:40px;">'.$val.'</span></h4>';
-          $query4 = "SELECT * FROM `fooditems` WHERE `itemType`='$val' AND `restaurant`='$name'";
+          $query4 = "SELECT * FROM `fooditems` WHERE `itemType`='$val' AND `restaurant`='$name' AND `item_status`=1";
           if($qrun4 = mysqli_query($conn,$query4))
           {
             $num = mysqli_num_rows($qrun4);

@@ -15,6 +15,12 @@
       if($usertype==="user")
       {
           header('Location:http://localhost/fprjct/index.php');
+          die;
+      }
+      else if(($usertype!="user") && $usertype!="admin")
+      {
+        header('Location:resAdmin.php');
+        die;
       }
       require_once('resAdd.php');
 ?>
@@ -159,30 +165,7 @@
 </head>
 <body>
 
-<div class="topbar">
-    <span style="font-size:30px;cursor:pointer;color:white;float:left;margin:15px;"  onclick="openNav()">&#9776;</span>
-    <span style="font-size:110%;cursor:pointer;color:white;float:right;margin:15px;" class="btn drpbtn"><?php echo $_SESSION['user_name']; ?>
-      <div class="drpdown-content">
-        <a href="profile.php">Profile</a>
-        <a href="../googleLogin/logout.php">Logout</a>
-      </div>
-    </span>
-</div>
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">About</a>
-  <button class="btn btn-secondary ml-4" data-toggle="collapse" data-target="#navdashBoard">Dashboard</button>
-    <div id="navdashBoard" class="collapse" style="color:white;">
-      <ul style="">
-        <li style="list-style-type:none;">
-          <a href="#restaurant" style="font-size:100%;color:white;padding-left:3px;">Restaurants</a>
-        </li>
-      </ul>
-    </div>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
-</div>
+<?php require('adminNav.php'); ?>
 
 <div class="container-fluid mt-2">
 <div class="row">
@@ -255,23 +238,22 @@
                             <p class="card-subtitle">Overview of Customer Details</p>
                         </div>
                         <div class="ml-auto">
-                            <div class="dl">
+                          <div class="dl">
                             <?php
-                            $x=0;
                             ?>
-                                <select class="custom-select">
-                                    <option value="0" selected="">Monthly</option>
-                                    <option value="1">Daily</option>
-                                    <option value="2">Weekly</option>
-                                    <option value="3">Yearly</option>
+                                 <select class="form-control bg-light" data-role="select-dropdown" id="tstamp" onchange="showTime(this.value)";>
+                                    <option value="" selected="">All</option>
+                                    <option value="monthly" >Monthly</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
                                 </select>
-                            </div>
+                          </div>
                         </div>
                     </div>
                     <!-- title -->
                 </div>
                 <div class="container-md">
-    <div class="table-responsive">
+    <div class="table-responsive" id="timefilter">
       <?php
          $orderid_list = array();
          $dbauth = isset($_SESSION['userid']);
@@ -485,7 +467,7 @@
                                             <!-- Modal body -->
                                             <div class="modal-body" style="">
                                                 <form action="index.php" method="POST" enctype="multipart/form-data">
-                                                    <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-glass" aria-hidden="true"></i>&nbsp;Restaurant Name:</label> 
+                                                    <label for="name" class="col-12" style="font-weight:bold;"><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;Restaurant Name:</label> 
                                                     <input type="text" id="name" name="res_name" placeholder="Restaurant Name" required  style="border:1px solid black;border-radius:5px;"  class="col-10"><br>
                                                     <div class="row mt-2">
                                                         <div class="col-sm-12 col-md-5">
@@ -578,6 +560,23 @@ $(document).ready(function(){
         // }
       });
     });
+
+    function showTime(str)
+    {
+      // alert(str);
+     
+       var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function()
+      {
+        if(xhttp.readyState==4 && xhttp.status==200)
+        {
+          document.getElementById("timefilter").innerHTML= xhttp.responseText;
+        }
+      }
+    
+      xhttp.open('GET','stime.php?tstamp='+str+'&resName=all',true);
+      xhttp.send();
+    }
 
 </script>
    

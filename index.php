@@ -19,6 +19,10 @@ $_SESSION['url'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ?
      {
        header('Location:adminpanel/index.php');
      }
+     else if(($usertype!="user") && ($usertype!="admin"))
+     {
+       header('Location:adminPanel/resAdmin.php');
+     }
    }
 ?>
 <!doctype html>
